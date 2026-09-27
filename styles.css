@@ -585,6 +585,7 @@ pre.flow b{color:var(--fc);font-weight:500}
 .contact a:hover{color:var(--fg)}
 .fine{margin-top:1.5rem;font-size:.73rem;color:var(--muted);line-height:1.75}
 .copy{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem;margin-top:2rem;font-size:.71rem;color:var(--muted);font-family:var(--f-mono)}
+.copy > *:last-child{margin-left:auto}
 /* ══════════════  timeline  ══════════════ */
 .tlx-wrap{position:relative}
 .tlx{overflow-x:auto;overflow-y:hidden;padding-block:16.5rem;scrollbar-width:thin}
