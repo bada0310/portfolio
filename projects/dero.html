@@ -219,6 +219,31 @@
           </div>
           <p style="margin-top:.7rem;font-size:.85rem;color:var(--muted)">운영 인원이 3명 이상이고 서비스가 상시 트래픽을 받았다면, 마이그레이션 정책은 그대로 두되 배포는 관리형 오케스트레이터로 갔을 것입니다.</p>
         </div>
+      <div class="block" data-sec="decision">
+        <h4>기획 의사결정 — 무엇을 만들지 않았나</h4>
+
+        <div class="dec">
+          <div class="dec-q">Q. 6주에 다 넣을 수 없었다 — 무엇을 뺐고, 대신 무엇을 지켰나</div>
+          <p>기능을 더하는 판단은 근거가 없어도 할 수 있습니다. <strong>빼는 판단은 근거가 있어야만</strong> 할 수 있어서,
+             <b>6주 · 5인</b>이라는 조건을 먼저 적어놓고 무엇을 뺄지부터 정했습니다.</p>
+          <div class="tbl-scroll" style="margin-top:.8rem">
+            <table>
+              <thead><tr><th>선택지</th><th>얻는 것</th><th>치르는 것</th><th>판정</th></tr></thead>
+              <tbody>
+                <tr><td>사용자 <strong>자동 3D 모델 생성</strong></td><td>사용자가 자기 제품을 직접 올릴 수 있음</td><td><strong>품질 편차가 커서 6주 안에 검증이 안 됨</strong></td><td class="kill">후순위</td></tr>
+                <tr><td><strong>자연광 · 창문 표현</strong></td><td>장면이 그럴듯해 보임</td><td>&lsquo;있으면 예쁜 것&rsquo;이지 <strong>배치 판단에는 쓰이지 않음</strong></td><td class="kill">제외</td></tr>
+                <tr><td>둘 다 넣기</td><td>기능 목록이 길어짐</td><td>6주 안에 검증하지 못한 기능이 둘 늘어남</td><td class="kill">기각</td></tr>
+                <tr><td><strong>배치 판단에 직접 쓰이는 것만</strong></td><td>남긴 기능은 전부 메인 시나리오(탐색 &rarr; 상세 &rarr; 배치) 위에 있음</td><td>장면의 사실감을 포기</td><td><strong>채택</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="dec-win"><b>대신 지킨 것</b>호환성(모니터 &middot; 모니터암 &middot; 책상) &middot; 카메라 뷰 4종(1인칭 &middot; 3인칭 &middot; 탑뷰 &middot; 후면) &middot;
+             좌 &middot; 우 &middot; 앞 벽 토글 &middot; 선정리 &middot; 제품 간편 등록.</p>
+          <p class="dec-cost"><b>감수한 것</b> 자동 생성이 빠지면서 제품 수가 우리가 만든 에셋 수에 묶였습니다.
+             <b>자연광을 뺀 화면은 실제 방보다 평평해 보입니다</b> &mdash; 배치가 맞는지 판단하는 데는 지장이 없다고 보고 넘어갔습니다.</p>
+        </div>
+      </div>
+
               <div class="block" data-sec="decision">
         <h4>Frontend 의사결정 — 왜 이걸 골랐고, 무엇을 버렸나</h4>
 
