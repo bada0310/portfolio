@@ -1,0 +1,23 @@
+# 저장소에는 LF로 저장하고, 체크아웃할 때는 각 OS가 원하는 대로 둔다.
+#
+# 이게 없으면 Windows 작업 사본이 CRLF로 저장되고 git 은 커밋할 때마다 다시
+# 정규화한다. 그 결과 아무것도 안 고쳐도 `git status` 가 모든 파일을 수정된
+# 것으로 보고하고, 실제로 바뀐 파일이 그 목록에 묻힌다.
+* text=auto eol=lf
+
+# 아래는 바이트 그대로 — 줄바꿈 변환이 닿으면 파일이 깨진다.
+*.webp  binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.svg   text eol=lf
+*.pdf   binary
+*.ttf   binary
+*.otf   binary
+*.woff  binary
+*.woff2 binary
+*.pptx  binary
+*.docx  binary
+*.xlsx  binary
