@@ -45,34 +45,40 @@
       <p class="sub">제품을 고르는 화면과 내 책상에 놓아보는 화면을 하나로 합친 서비스.
          EC2 <strong>한 대</strong>에서 무중단 배포까지 끌고 갔습니다.</p>
       <div class="facts"><span>팀 <b>5인</b></span><span>기여도 40%</span><span>백엔드 · 인프라 · CI/CD · 관측</span></div>
-      <div class="links">
+      <div class="links"><a class="chiplink" href="/projects/dero-bm">비즈니스 모델 편 보기 →</a>
         <span class="chiplink off">소스 · SSAFY GitLab (로그인 필요)</span>
       </div>
     </div>
     <div class="deep-body">
     <div class="block" data-sec="overview">
           <h4>Problem · Evidence</h4>
-          <p>데스크테리어 제품은 크기와 조합에 따라 실제 배치 결과가 달라집니다. 그런데 구매 전에 확인할 수 있는 건 제품 이미지와 상품 정보뿐이라,
-             <strong>&ldquo;내 책상에 맞을까&rdquo;를 실측과 감으로 판단</strong>해야 했습니다.</p>
-          <p><strong>77명 조사</strong>에서 탐색보다 <strong>배치를 미리 보는 경험</strong>을 원했습니다.
-             시장은 <strong>2025년 114억 달러 · 연 6.9% 성장</strong>, 퍼시스 &lsquo;데스커&rsquo;는 <strong>매출 1,000억</strong>.
-             수요는 있는데 확인 수단이 없었습니다.</p>
-          <p>오늘의집 같은 인테리어 커머스는 &lsquo;완성된 공간 사진&rsquo;을 보여줄 뿐 <strong>&lsquo;내 책상&rsquo; 단위의 사전 검증</strong>을 하지 않고, 기존 3D 배치 서비스는 방 전체 스케일이라 데스크 단위 호환성을 다루지 않습니다.</p>
+          <dl class="kv">
+            <dt>문제</dt><dd>구매 전 확인할 수 있는 건 제품 이미지와 상품 정보뿐 — <b>“내 책상에 맞을까”를 실측과 감으로</b> 판단해야 했습니다.</dd>
+            <dt>수요</dt><dd><b>77명 조사</b>에서 탐색보다 <b>배치를 미리 보는 경험</b>을 원했습니다.</dd>
+            <dt>시장</dt><dd>2025년 <b>114억 달러 · 연 6.9% 성장</b> · 퍼시스 ‘데스커’ 매출 <b>1,000억</b></dd>
+            <dt>공백 ①</dt><dd>인테리어 커머스는 ‘완성된 공간 사진’을 보여줄 뿐 <b>‘내 책상’ 단위의 사전 검증</b>이 없습니다.</dd>
+            <dt>공백 ②</dt><dd>기존 3D 배치 서비스는 <b>방 전체 스케일</b>이라 데스크 단위 호환성을 다루지 않습니다.</dd>
+          </dl>
         </div>
               <div class="block" data-sec="overview">
           <h4>나의 활동 &mdash; 팀 리딩</h4>
-          <p>각자 무엇을 하는지 주 단위로만 알 수 있어 겹치는 작업과 대기가 생겼습니다. 사람이 아니라 구조 문제였습니다 — 업무 단위가 &lsquo;기능&rsquo;이라 병렬화가 안 됐습니다.</p>
-          <p>월요일 아침 스프린트 시작 · 주간/데일리 스크럼 · Jira 이슈 컨벤션 + 담당자 배정 + 스토리 포인트 산정 · API 명세 사전 정리 · 업무 병렬화를 제안했습니다.
-             용어를 몰랐던 <strong>DX 프로젝트 때 스스로 쓰던 방식</strong>을 팀 절차로 올린 것입니다.</p>
-          <p>요구 기능은 셋이었습니다 &mdash; <strong>① 모니터암 관절이 실제로 움직일 것 · ② 조명이 조명처럼 보일 것 ·
-             ③ 부품에 따라 책상 위가 아니라 벽면·타공판에도 붙을 것</strong>. 여기에 폴리곤·텍스처 최적화가 따라붙었습니다.</p>
-          <p>셋 다 <b>모델을 뽑고 나서 고칠 수 있는 일이 아니었습니다.</b> 관절 축도 재질도 부착면도 모델 구조가 정해지는 순간 같이 정해집니다.
-             그래서 요구마다 <strong>프로토타입을 따로 만들어 먼저 확인한 뒤에</strong> 본 모델을 뽑았습니다. 이 프로젝트의 POC 습관은 여기서 나왔습니다.</p>
-          <p>결과: 요구 기능이 <strong>3개에서 6개로 늘었을 때</strong>도 기존 세 개의 확장이라 스토리 추가만으로 대응했고 일정 지연이 없었습니다.
-             이후 프로젝트도 같은 방식으로 시작합니다.</p>
+          <dl class="kv">
+            <dt>증상</dt><dd>각자 무엇을 하는지 주 단위로만 알 수 있어 겹치는 작업과 대기가 생겼습니다.</dd>
+            <dt>진단</dt><dd>사람이 아니라 <b>구조</b> 문제였습니다 — 업무 단위가 ‘기능’이라 병렬화가 안 됐습니다.</dd>
+            <dt>제안</dt><dd>월요일 아침 스프린트 시작 · 주간/데일리 스크럼 · Jira 이슈 컨벤션 + 담당자 배정 + <b>스토리 포인트 산정</b> · API 명세 사전 정리 · 업무 병렬화</dd>
+            <dt>출처</dt><dd>용어를 몰랐던 DX 프로젝트 때 <b>스스로 쓰던 방식</b>을 팀 절차로 올린 것입니다.</dd>
+            <dt>요구</dt><dd>① 모니터암 관절이 실제로 움직일 것 · ② 조명이 조명처럼 보일 것 · ③ 부품에 따라 <b>벽면·타공판에도</b> 붙을 것 (+ 폴리곤·텍스처 최적화)</dd>
+            <dt>판단</dt><dd>셋 다 <b>모델을 뽑고 나서 고칠 수 있는 일이 아니었습니다</b> — 관절 축도 재질도 부착면도 모델 구조가 정해지는 순간 같이 정해집니다.</dd>
+            <dt>대응</dt><dd>요구마다 <b>프로토타입을 따로 만들어 먼저 확인</b>한 뒤에 본 모델을 뽑았습니다.</dd>
+            <dt>결과</dt><dd>요구가 <b>3개에서 6개로</b> 늘었을 때도 기존 셋의 확장이라 스토리 추가만으로 대응 — <b>일정 지연 0</b></dd>
+          </dl>
         </div>
 
-      <div class="block" data-sec="arch">
+              <figure class="dgm pic">
+          <img src="/assets/dero-arm-poc.webp" alt="모니터암 프로토타입 화면. 책상 가로·세로·높이와 벽면 설정을 바꿔가며 모니터암 관절과 VESA 착탈을 확인하는 검증 도구다." loading="lazy" decoding="async">
+          <figcaption><b>요구 ①의 프로토타입</b> — 관절과 VESA 착탈을 본 모델을 뽑기 전에 확인했다. 모델 구조가 정해지면 못 고치는 것들이라 순서를 앞으로 당겼다.</figcaption>
+        </figure>
+<div class="block" data-sec="arch">
         <h4>3D 모델 요청 처리 흐름</h4>
         <p class="dgm-lead">⑤가 PostgreSQL 하나로 간 이유입니다.</p>
         <figure class="dgm">
@@ -128,7 +134,7 @@
         <div class="meta2">
           <div><span class="meta2-k">기간</span>2026.07 – 08 (6주)</div>
           <div><span class="meta2-k">팀</span>5인 · 팀원 · 기여도 40%</div>
-          <div><span class="meta2-k">나의 역할</span><b>프로젝트 기획(PM)</b> · 백엔드 · 클라우드 인프라 · CI/CD · 관측</div>
+          <div><span class="meta2-k">나의 역할</span><b>프로젝트 기획(PM) · 프로젝트 관리</b> · 백엔드 · 클라우드 인프라 · CI/CD · 관측</div>
           <div><span class="meta2-k">성과</span>SSAFY 공통 프로젝트 경진대회 <b>우수상</b> · 서비스 운영 중</div>
         </div>
         <div class="stack2">

@@ -167,8 +167,8 @@ ul{margin:0;padding:0;list-style:none}
   border-radius:24px;border:1px solid var(--line);overflow:hidden;box-shadow:var(--shadow-lg);
   background:
     radial-gradient(120% 95% at 50% 118%, color-mix(in srgb, var(--c-blue) 42%, transparent) 0%, transparent 62%),
-    repeating-linear-gradient(0deg, color-mix(in srgb, var(--fg) 7%, transparent) 0 1px, transparent 1px 22px),
-    repeating-linear-gradient(90deg, color-mix(in srgb, var(--fg) 7%, transparent) 0 1px, transparent 1px 22px),
+    /* 카드 안쪽도 모눈이 아니라 점 — 배경과 같은 결로 */
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--fg) 13%, transparent) 1px, transparent 1.5px) 0 0 / 22px 22px,
     var(--surface-2);
 }
 @media (max-width:900px){.hero-card{margin-inline:0;max-width:240px}}
@@ -227,7 +227,13 @@ ul{margin:0;padding:0;list-style:none}
 
 /* ══════════════  FOLDERS  ══════════════ */
 .folders{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin:3.2rem 0 2.2rem}
+/* 핵심 넷은 2×2 — 한 줄에 넷이면 한 칸이 좁아 개조식이 눌린다 */
+.folders.four{grid-template-columns:repeat(2,1fr);gap:2rem 2.4rem}
+/* 칸이 넓어지면 1:.78 비율 그대로는 폴더 그림만 440px 가 된다.
+   높이를 묶어 그림이 카드를 잡아먹지 않게 한다 */
+.folders.four .folder-art{aspect-ratio:auto;height:230px}
 @media (max-width:860px){.folders{grid-template-columns:1fr;gap:2.6rem;margin-top:2.8rem}}
+@media (max-width:860px){.folders.four{grid-template-columns:1fr}}
 
 .folder{
   display:block;width:100%;text-align:left;background:none;border:0;padding:0;
@@ -307,7 +313,13 @@ ul{margin:0;padding:0;list-style:none}
 .folder-cap{display:flex;align-items:baseline;gap:.6rem;margin-top:1.1rem}
 .folder-cap .nm{font-size:1.22rem;font-weight:700;letter-spacing:-.035em;line-height:1.25;transition:color .2s}
 .folder-cap .yr{font-family:var(--f-mono);font-size:.7rem;color:var(--muted);margin-left:auto;white-space:nowrap}
-.folder-desc{display:block;font-size:.83rem;color:var(--muted);margin-top:.35rem;font-weight:300;line-height:1.6}
+/* 개조식 — 라벨 한 칸, 값 한 칸. 한글은 어절 단위로 끊는다 */
+.folder-desc{display:grid;grid-template-columns:auto 1fr;gap:.34rem .7rem;
+  margin-top:.7rem;align-items:baseline}
+.fd-k{font-family:var(--f-mono);font-size:.62rem;font-weight:700;letter-spacing:.05em;
+  color:var(--muted);white-space:nowrap;padding-top:.1rem}
+.fd-v{font-size:.79rem;line-height:1.45;color:var(--fg-2);font-weight:400;word-break:keep-all}
+.fd-v b{font-weight:700;color:var(--fg)}
 .folder-state{
   display:inline-flex;align-items:center;gap:.35rem;margin-top:.7rem;
   font-family:var(--f-disp);font-size:.64rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
@@ -972,9 +984,13 @@ html{scroll-padding-top:8.5rem}
 .tlx-rail::after{
   content:"";position:absolute;left:0;right:0;top:calc(var(--rule) + 30px);height:210px;z-index:0;
   pointer-events:none;transform:none;
+  /* 90deg, not 100deg. skewY only shears y by x, so a vertical family stays
+     vertical and a horizontal one takes the rail's angle — the two then read
+     as a right-angle lattice lying in the rail's plane. At 100deg the cross
+     lines leaned off that plane and the ground looked twisted. */
   background-image:
-    repeating-linear-gradient(100deg, color-mix(in srgb,var(--fg) 30%,transparent) 0 1px, transparent 1px 56px),
-    repeating-linear-gradient(0deg,   color-mix(in srgb,var(--fg) 19%,transparent) 0 1px, transparent 1px 34px);
+    repeating-linear-gradient(90deg, color-mix(in srgb,var(--fg) 30%,transparent) 0 1px, transparent 1px 56px),
+    repeating-linear-gradient(0deg,  color-mix(in srgb,var(--fg) 19%,transparent) 0 1px, transparent 1px 34px);
   -webkit-mask-image:linear-gradient(180deg,#000 0%, rgba(0,0,0,.5) 58%, transparent 92%);
   mask-image:linear-gradient(180deg,#000 0%, rgba(0,0,0,.5) 58%, transparent 92%);
 }
@@ -1105,13 +1121,12 @@ a.tlx-card:hover, button.tlx-card:hover,
 
 /* ══════════════  plain mode — motion and ornament off  ══════════════ */
 :root[data-plain="1"] #bg-grid{display:none}
-/* the graph paper stays — only the pointer warp goes away */
+/* 점 바탕은 그대로 두고 커서 렌즈만 꺼진다 (캔버스와 같은 28px 격자) */
 :root[data-plain="1"] body{
   background-image:
-    repeating-linear-gradient(90deg, var(--grid-hi) 0 1px, transparent 1px 232px),
-    repeating-linear-gradient(0deg,  var(--grid-hi) 0 1px, transparent 1px 232px),
-    repeating-linear-gradient(90deg, var(--grid)    0 1px, transparent 1px 58px),
-    repeating-linear-gradient(0deg,  var(--grid)    0 1px, transparent 1px 58px);
+    radial-gradient(circle at 1px 1px, var(--grid-hi) 1.4px, transparent 1.7px),
+    radial-gradient(circle at 1px 1px, var(--grid)    1px,   transparent 1.3px);
+  background-size:112px 112px, 28px 28px;
   background-attachment:fixed;
 }
 /* folders keep opening — that is an affordance, not ornament.
@@ -1185,4 +1200,75 @@ dialog.lbx::backdrop{background:rgba(10,10,12,.965);backdrop-filter:blur(4px)}
 @media (prefers-reduced-motion:reduce){
   .shot::after{transition:none}
   .lbx-btn{transition:none}
+}
+
+/* ══ 메인 배너 — 두 줄 디돈, 아랫줄은 쳤다 지웠다 ══ */
+.banner{
+  font-family:"Playfair Display",Georgia,"Times New Roman",serif;
+  text-align:center;line-height:.94;color:var(--fg);
+  margin:0 0 3.4rem;-webkit-user-select:none;user-select:none;
+}
+.bn-1{display:block;font-weight:900;letter-spacing:-.012em;
+  font-size:clamp(2rem,8.4vw,6.2rem)}
+/* 커서가 붙었다 떨어져도 줄 높이가 흔들리지 않게 최소 높이를 준다 */
+.bn-2{display:block;font-style:italic;font-weight:700;letter-spacing:-.004em;
+  font-size:clamp(2.2rem,9.4vw,7rem);min-height:1.02em}
+.bn-c{display:inline-block;width:.05em;height:.78em;margin-left:.045em;
+  vertical-align:-.06em;background:currentColor;
+  animation:bn-blink 1.06s steps(1,end) infinite}
+@keyframes bn-blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.bn-c{animation:none}}
+/* 사진이 이력 쪽으로 가면서 홈 hero 는 한 단이 된다 */
+.hero-grid.solo{grid-template-columns:1fr}
+
+/* ══ 개조식 — 상세 페이지 개요의 라벨 + 값 ══
+   서술형 문단을 끊어 라벨을 붙인 자리. 카드의 .fd-k/.fd-v 와 같은 결이되
+   본문이라 글자가 한 호흡 크다. 한글은 어절 단위로 끊는다. */
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.55rem 1.15rem;
+  align-items:baseline;margin:.1rem 0 0}
+.kv dt{font-family:var(--f-mono);font-size:.68rem;font-weight:700;letter-spacing:.05em;
+  color:var(--muted);white-space:nowrap;padding-top:.2rem}
+.kv dd{margin:0;font-size:.93rem;line-height:1.62;color:var(--fg-2);word-break:keep-all}
+.kv dd b,.kv dd strong{font-weight:700;color:var(--fg)}
+@media (max-width:620px){
+  /* 좁은 화면에서는 라벨을 값 위로 올린다 — 두 칸이면 값이 너무 좁다 */
+  .kv{grid-template-columns:1fr;gap:.15rem}
+  .kv dt{padding-top:.5rem}
+}
+
+/* ══ 기각 / 채택을 나란히 세우는 판단 카드 ══
+   DERO 비즈니스 모델 쪽을 만들 때 별도 파일(발표용 덱)에서 쓰던 클래스를
+   그대로 옮겨 적었는데 사이트 CSS 에는 규칙이 없었다 — 두 칸이 세로로
+   쌓이고 목록용 .card 의 그림자까지 얹혀 있었다.
+   목록의 .card 와 이름이 겹치므로 전부 .pair 안으로 한정한다. */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:.9rem 0 .3rem}
+.pair > .card{
+  border:1px solid var(--line);border-radius:12px;padding:.95rem 1.1rem;
+  background:var(--surface);box-shadow:none;overflow:visible;
+}
+/* 목록 카드의 윗단 색 막대가 여기까지 따라온다 — 판단 카드에는 불필요 */
+.pair > .card::before,.pair > .card::after{display:none}
+.pair > .card.no{background:var(--bg-2)}
+.pair > .card.yes{border-color:color-mix(in srgb, var(--fc) 42%, transparent)}
+.pair > .card .k{
+  display:block;font-family:var(--f-disp);font-size:.64rem;font-weight:700;
+  letter-spacing:.1em;color:var(--muted);margin-bottom:.45rem;
+}
+.pair > .card.yes .k{color:var(--fc)}
+.pair > .card p{font-size:.89rem;line-height:1.62;color:var(--fg-2);word-break:keep-all}
+.pair > .card p + p{margin-top:.45rem}
+.pair > .card .cost{font-size:.86rem;color:var(--muted)}
+@media (max-width:760px){.pair{grid-template-columns:1fr}}
+
+/* ══ 본문 구역은 바탕을 덮는다 ══
+   배경이 점이 되면서 글자 뒤로 점이 비쳐 읽기 불편했다. 구역마다
+   화면 너비의 흰 띠를 깔되 위아래를 풀어 네모 상자처럼 보이지 않게 한다.
+   (지나온 순서가 쓰던 .tlx-bgcover 와 같은 수법) */
+.sec{position:relative}
+.sec::before{
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  left:calc(50% - 50vw);width:100vw;top:-1.8rem;bottom:-1.8rem;
+  background:var(--bg);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 2.6rem,#000 calc(100% - 2.6rem),transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 2.6rem,#000 calc(100% - 2.6rem),transparent 100%);
 }

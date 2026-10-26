@@ -53,8 +53,12 @@
     <div class="deep-body">
     <div class="block" data-sec="overview">
           <h4>Problem · Evidence</h4>
-          <p>예약 서비스는 장애 상황에서도 계속 쓸 수 있어야 합니다. <strong>예약이 안 되는 순간이 곧 이탈</strong>입니다. 그런데 안정성을 높이려고 인프라를 무조건 확장하면 그게 그대로 <strong>고정비</strong>가 됩니다.</p>
-          <p>초기 산정 <strong>월 약 27만 원</strong>. 서비스 규모에 비해 과한 구성이었고, <strong>초과 스펙은 줄이는 결정을 아무도 하지 않습니다.</strong></p>
+          <dl class="kv">
+            <dt>요구</dt><dd>예약이 안 되는 순간이 곧 <b>이탈</b> — 장애 상황에서도 계속 쓸 수 있어야 했습니다.</dd>
+            <dt>제약</dt><dd>안정성을 높이려고 인프라를 무조건 확장하면 그게 그대로 <b>고정비</b>가 됩니다.</dd>
+            <dt>계측</dt><dd>초기 산정 <b>월 약 27만 원</b> — 서비스 규모에 비해 과한 구성이었습니다.</dd>
+            <dt>공백</dt><dd>초과 스펙을 줄이는 결정은 아무도 하지 않습니다.</dd>
+          </dl>
           <div class="tbl-scroll" style="margin-top:.85rem">
             <table>
               <thead><tr><th>구성 대안</th><th>얻는 것</th><th>치르는 것</th><th>판단</th></tr></thead>
@@ -68,15 +72,16 @@
         </div>
               <div class="block" data-sec="overview">
         <h4>나의 활동 — 팀장으로 무엇을 했나</h4>
-        <p>4인 팀의 <strong>팀장</strong>이었고 기여도는 60%입니다. 맡은 범위는 <strong>요구사항·운영 조건 정의 · 비용과 안정성 기준 의사결정 · AWS 아키텍처 설계 · ECS 구성 · 운영 환경 구축</strong>입니다.</p>
-        <p>가장 먼저 한 일은 코드를 짜는 게 아니라 <strong>기준을 문서로 정하는 것</strong>이었습니다.
-           &ldquo;허용 가능한 다운타임은 어디까지인가&rdquo;, &ldquo;월 예산 상한은 얼마인가&rdquo; 두 가지를 팀 합의로 먼저 못 박았습니다.</p>
+        <dl class="kv">
+          <dt>역할</dt><dd>4인 팀 <b>팀장</b> · 기여도 <b>60%</b></dd>
+          <dt>범위</dt><dd>요구사항·운영 조건 정의 · 비용과 안정성 기준 의사결정 · AWS 아키텍처 설계 · ECS 구성 · 운영 환경 구축</dd>
+          <dt>먼저 한 일</dt><dd>코드가 아니라 <b>기준을 문서로</b> — “허용 가능한 다운타임은 어디까지인가”, “월 예산 상한은 얼마인가” 두 가지를 팀 합의로 못 박았습니다.</dd>
+          <dt>적용</dt><dd>이후 모든 구성 선택을 그 기준으로 판정했습니다 — Active-Active 기각도, NAT Gateway 개수를 다시 본 것도 같은 잣대입니다.</dd>
+        </dl>
         <div class="callout" style="margin-top:.8rem">
           <b>기준이 없으면 모든 확장이 정당해 보입니다.</b> 안정성은 사고 싶은 만큼 살 수 있는 것이라 상한선이 없으면 끝없이 커집니다.
           그래서 &ldquo;안정성을 얼마나 살 것인가&rdquo;를 <b>기술 선택이 아니라 기준 설정 문제</b>로 놓고 시작했습니다.
         </div>
-        <p style="margin-top:.8rem">이후 모든 구성 선택은 그 기준으로 판정했습니다 — Active-Active를 기각한 것도,
-           NAT Gateway 개수를 다시 본 것도 같은 잣대였습니다.</p>
       </div>
 
       <div class="block" data-sec="arch">

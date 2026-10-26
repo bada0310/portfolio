@@ -45,8 +45,11 @@
     <div class="deep-body">
             <div class="block" data-sec="overview">
         <h4>Problem · 계측</h4>
-        <p>CS 스터디를 운영하면서 매 회차 <strong>3~4시간</strong>이 들었습니다. 그런데 그 시간의 대부분이 공부가 아니라 <strong>운영</strong>이었습니다 — 노션에 흩어진 정리 글에서 문제를 뽑고, 사람마다 답을 받고, 채점하고, 집계하는 일.</p>
-        <p>공부에 쓰는 시간과 운영에 쓰는 시간을 나눠서 재보니 <strong>운영 쪽이 줄일 수 있는 부분</strong>이었습니다.</p>
+        <dl class="kv">
+          <dt>현상</dt><dd>CS 스터디를 운영하면서 매 회차 <b>3~4시간</b>이 들었습니다.</dd>
+          <dt>내역</dt><dd>그 시간의 대부분이 공부가 아니라 <b>운영</b>이었습니다 — 노션에 흩어진 정리 글에서 문제를 뽑고, 사람마다 답을 받고, 채점하고, 집계하는 일.</dd>
+          <dt>계측</dt><dd>공부 시간과 운영 시간을 나눠서 재보니 <b>줄일 수 있는 쪽은 운영</b>이었습니다.</dd>
+        </dl>
       </div>
 <div class="block" data-sec="overview">
         <h4>핵심 성과 · Key Achievements</h4>
@@ -114,11 +117,23 @@
         → 제출 집계 · 채점 · 결과 표시</pre>
         <p style="margin-top:.7rem">출제자가 <strong>평소처럼 노션에 정리만 하면</strong> 그게 그대로 문제가 됩니다. 새로운 도구를 배우게 하지 않는 것이 설계 조건이었습니다.</p>
       </div>
-      <div class="block" data-sec="overview">
+              <figure class="dgm pic">
+          <img src="/assets/quiz-home.webp" alt="퀴즈 방 입장 화면. 문제를 풀 출제자를 고르는 버튼 두 개와 전체 종합 랭킹 보드 버튼이 있다." loading="lazy" decoding="async">
+          <figcaption><b>입장</b> — 출제자별로 방이 갈린다. 노션에 정리한 사람이 곧 출제자가 된다.</figcaption>
+        </figure>
+        <figure class="dgm pic">
+          <img src="/assets/quiz-host-monitor.webp" alt="출제자 화면. 이전 문제·다음 문제·정답 확인 버튼과 실시간 응답 모니터링 목록이 있고, 제출자별 답안과 정답 체크가 보인다." loading="lazy" decoding="async">
+          <figcaption><b>출제자 화면</b> — 누가 무엇을 냈는지 실시간으로 모이고, 채점은 체크 한 번으로 끝난다.</figcaption>
+        </figure>
+<div class="block" data-sec="overview">
         <h4>Result</h4>
         <div class="callout" style="margin-top:.8rem"><b>반복되는 판단을 도구로 옮긴 첫 경험입니다.</b> 이후 프로젝트에서도 &ldquo;사람이 매번 같은 결정을 하고 있으면 그건 코드로 옮길 수 있다&rdquo;를 먼저 봅니다.</div>
       </div>
-      <div class="block" data-sec="trouble">
+              <figure class="dgm pic">
+          <img src="/assets/quiz-guest-masked.webp" alt="응시자 화면. 해시 테이블의 평균 탐색 시간복잡도를 묻는 문제와 정답 입력란, 그리고 다른 사람들이 낸 답이 가려진 채로 보이는 실시간 제출 답안 목록이 있다." loading="lazy" decoding="async">
+          <figcaption><b>응시자 화면</b> — 남의 답은 <b>가려서</b> 보여준다. 누가 냈는지는 알지만 무엇을 냈는지는 모른다.</figcaption>
+        </figure>
+<div class="block" data-sec="trouble">
         <h4>Troubleshooting — 동시성을 풀지 않고 비껴간 결정</h4>
         <div class="ts">
           <div class="ts-row"><div class="ts-k">문제</div><div class="ts-v">여러 명이 <strong>같은 순간에 제출</strong>하면 집계가 어긋날 수 있다는 걸 알고 있었습니다. 퀴즈 쇼는 동점 처리와 순위가 걸려 있어서 무시할 수 없는 문제였습니다.</div></div>

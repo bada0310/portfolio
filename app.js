@@ -38,7 +38,9 @@
   if (PLAIN || !cv) { if (cv) cv.remove(); } else {
   var cx = cv.getContext('2d');
   var W = 0, H = 0, minor = '#16161A', major = '#22222A';
-  var STEP = 58, MAJOR = 4, SEG = 11, R = 300, STRENGTH = 0.42;   /* R/STRENGTH are damped below when reduce-motion is on */
+  /* 점 격자. 선이던 시절의 STEP 은 58 이었는데, 점은 그만큼 벌리면
+     듬성해 보여서 절반으로 좁혔다. SEG(선을 잘라 그리던 간격)는 필요 없다. */
+  var STEP = 28, MAJOR = 4, R = 300, STRENGTH = 0.42;   /* R/STRENGTH are damped below when reduce-motion is on */
   var mx = -1e5, my = -1e5, tx = -1e5, ty = -1e5, raf = null;
   var still = matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -67,26 +69,22 @@
     var k = 1 - Math.sqrt(d2) / R;
     return y + dy * k * k * STRENGTH;
   }
+  /* 모눈이 아니라 점. 격자가 만나던 자리에만 점을 찍는다 — 글자 뒤로
+     선이 지나가지 않아 본문이 훨씬 덜 어지럽다. 커서 렌즈는 그대로라
+     점들이 커서를 피해 밀려난다. */
+  var TAU = Math.PI * 2;
   function paint(){
     if (!W) return;
     cx.clearRect(0, 0, W, H);
-    cx.lineWidth = 1;
-    var i, x, y;
-    for (i = 0, x = 0; x <= W + STEP; x += STEP, i++){
-      cx.beginPath(); cx.strokeStyle = (i % MAJOR === 0) ? major : minor;
-      for (y = 0; y <= H + SEG; y += SEG){
-        var px = wx(x, y), py = wy(x, y);
-        if (y === 0) cx.moveTo(px, py); else cx.lineTo(px, py);
+    var i, j, x, y, big;
+    for (j = 0, y = 0; y <= H + STEP; y += STEP, j++){
+      for (i = 0, x = 0; x <= W + STEP; x += STEP, i++){
+        big = (i % MAJOR === 0 && j % MAJOR === 0);
+        cx.fillStyle = big ? major : minor;
+        cx.beginPath();
+        cx.arc(wx(x, y), wy(x, y), big ? 1.6 : 1.05, 0, TAU);
+        cx.fill();
       }
-      cx.stroke();
-    }
-    for (i = 0, y = 0; y <= H + STEP; y += STEP, i++){
-      cx.beginPath(); cx.strokeStyle = (i % MAJOR === 0) ? major : minor;
-      for (x = 0; x <= W + SEG; x += SEG){
-        var qx = wx(x, y), qy = wy(x, y);
-        if (x === 0) cx.moveTo(qx, qy); else cx.lineTo(qx, qy);
-      }
-      cx.stroke();
     }
   }
   function tick(){
@@ -316,22 +314,51 @@
   /* ══════════ role view — ?role=fe | infra | data | pm ══════════ */
   (function () {
     var P = {
+      derobm:   { n: 'DERO 비즈니스 모델',  y: '2026.07 – 08', c: 'c-pink',   p: ['수익화 4단계', '규칙 vs AI', '피치덱 20장'],
+                  b: [['문제 정의', '만든 시뮬레이터를 <b>어떻게 돈이 되게 할 것인가</b>'],
+                       ['나의 역할', '가치 분석 · <b>수익 모델 설계</b> · <b>디지털 마케팅</b> · 인터뷰 설계'],
+                       ['핵심 경험', '앞 단계가 다음을 여는 <b>수익화 4단계</b>로 순서를 묶음'],
+                       ['기술 성과', '피치덱 <b>20장</b> · 검증 못 한 가정을 따로 명시']] },
       vimp:     { n: 'Bimp',               y: '2024.03 – 06', c: 'c-blue',   p: ['YOLO 인식', '추천 알고리즘', '재고 정합성'],
-                  d: '냉장고 사진 한 장으로 식재료를 등록한다. 문제를 ‘추천’이 아니라 ‘등록’으로 재정의한 졸업 프로젝트.' },
+                  b: [['문제 정의', '추천이 아니라 <b>등록의 불편</b>이 진짜 병목이었다'],
+                       ['나의 역할', '인식 모델 · 추천 로직 · 재고 관리 설계'],
+                       ['핵심 경험', '서비스 문제를 <b>재정의</b>해 기능 범위를 다시 그림'],
+                       ['기술 성과', 'YOLO 기반 식재료 인식 · <b>대한산업공학회 장려상</b>']] },
       dero:     { n: 'DERO',               y: '2026.07 – 08', c: 'c-green',  p: ['blue-green', 'Three.js', '38MB → 378KB'],
-                  d: '제품을 고르는 화면과 내 책상에 놓아보는 화면을 합쳤다. EC2 한 대에서 무중단 배포까지.' },
+                  b: [['문제 정의', '구매 전 “내 책상에 맞을까”를 확인할 수단 없음 (<b>77명 조사</b>)'],
+                       ['나의 역할', '<b>프로젝트 기획(PM) · 프로젝트 관리</b> · 백엔드 · 인프라'],
+                       ['핵심 경험', '6주·5인 조건을 먼저 적고 <b>뺄 기능부터</b> 정함'],
+                       ['기술 성과', '요구 <b>3개→6개</b>에도 일정 지연 <b>0</b> · 경진대회 우수상']] },
       aws:      { n: 'AWS 예약 서비스',     y: '2024.11 – 12', c: 'c-yellow', p: ['멀티 리전', '−20%', 'OpenSearch'],
-                  d: '배포로 끝내지 않고 장애 추적·확장성·비용까지. 비용의 최대 항목이 NAT Gateway였다.' },
+                  b: [['문제 정의', '“안정성을 얼마나 살 것인가”를 <b>기준 문제</b>로 전환'],
+                       ['나의 역할', '<b>팀장</b> · 클라우드 아키텍처 · 백엔드'],
+                       ['핵심 경험', '비용을 항목별로 분해해 최대 항목(NAT Gateway) 특정'],
+                       ['기술 성과', '멀티 리전 설계 · 비용 <b>−20%</b> · <b>최우수상</b>']] },
       lumiere:  { n: 'Lumière',            y: '2026.05 – 06', c: 'c-pink',   p: ['Cloudflare Tunnel', '데이터 계약', 'FastAPI'],
-                  d: '진단과 추천 사이의 빈 칸을 메웠다. 붙이기 전에 데이터 계약부터 문서로 확정한 2인 협업.' },
+                  b: [['문제 정의', '진단이 <b>구매로 이어지지 않는</b> 빈 칸'],
+                       ['나의 역할', 'AI 설계 · 클라우드 아키텍처 · 배포'],
+                       ['핵심 경험', '코드보다 <b>주고받을 데이터 양식</b>을 먼저 확정'],
+                       ['기술 성과', '설계 문서 <b>7종</b> · 배포 시 수정 지점 <b>3곳 → 0곳</b>']] },
       pawlice:  { n: '멍경찰과 냥도둑',      y: '2026.01 – 06', c: 'c-yellow', p: ['STT 5종', '비대칭 설계', 'Unity'],
-                  d: '손이 이미 묶여 있어 음성이 유일하게 남은 입력 채널이었다. 1인 프로젝트.' },
+                  b: [['문제 정의', '역할이 다른 두 편이 <b>서로에게 영향</b>을 주게 하는 규칙'],
+                       ['나의 역할', '게임 기획 · 규칙 설계 · 구현 · 검증 (1인)'],
+                       ['핵심 경험', '손이 묶인 상황이라 <b>음성이 유일한 입력 채널</b>'],
+                       ['기술 성과', '음성 명령 <b>5종</b> 실동작 · 비대칭 구조 완성']] },
       quiz:     { n: '실시간 노션 퀴즈 쇼',  y: '2026.03 – 04', c: 'c-blue',   p: ['Notion API', 'WebSocket', '3~4h → 2h'],
-                  d: '새 도구를 배우게 하지 않았다. 평소처럼 노션에 정리하면 그게 그대로 문제가 된다.' },
+                  b: [['문제 정의', '스터디 시간의 대부분이 공부가 아니라 <b>운영</b>'],
+                       ['나의 역할', '문제 정의 · 기획 · 개발 · 운영 적용 (1인)'],
+                       ['핵심 경험', '새 도구를 배우게 하지 않고 <b>쓰던 노션을 그대로</b> 읽음'],
+                       ['기술 성과', '회차당 준비시간 <b>3~4시간 → 2시간</b>']] },
       cafe:     { n: '인천 카페 창업 분석',  y: '2025',         c: 'c-green',  p: ['150개 행정동', 'SHAP', 'BERT'],
-                  d: '정확도가 아니라 “왜 이 입지인가”에 답하는 분석. 설명 가능성을 목표로 잡았다.' },
+                  b: [['문제 정의', '창업자에게 필요한 건 점수가 아니라 <b>점수의 이유</b>'],
+                       ['나의 역할', '데이터 수집 · 변수 설계 · 분석 · 해석'],
+                       ['핵심 경험', '목표를 정확도에서 <b>설명 가능성</b>으로 옮김'],
+                       ['기술 성과', '행정동 <b>150개</b> 수집 · 매출 상관 <b>상위 9개 변수</b> 특정']] },
       movierec: { n: '영화 추천 (NCF)',     y: '2025',         c: 'c-pink',   p: ['GMF vs NNMF', '과적합 판정', 'PyTorch'],
-                  d: '두 모델을 나란히 세우고 학습 성능이 아니라 일반화 성능으로 골랐다.' }
+                  b: [['문제 정의', '어떤 모델이 좋은지 판단할 <b>기준</b>부터 필요'],
+                       ['나의 역할', '모델 구현 · 비교 실험 · 보고서'],
+                       ['핵심 경험', '학습 성능이 아니라 <b>일반화 성능</b>으로 선택'],
+                       ['기술 성과', 'GMF vs NNMF 비교 · 과적합 판정']] }
     };
 
     var ROLES = {
@@ -339,36 +366,36 @@
         label: 'Frontend · UI/UX', cls: 'ax-fe',
         pill: 'Portfolio 2026 · Frontend · UI/UX',
         head: '화면에서 사람이 할 수 있는 일을 설계합니다.',
-        sub: '3D 시뮬레이터 · 게임 인터랙션 · 업무 도구. 입력 채널과 성능 예산을 먼저 정하고 시작합니다.',
-        top: ['dero', 'pawlice', 'quiz']
+        sub: '입력 채널과 성능 예산을 먼저 정하고 시작합니다. 와이어프레임·스토리보드부터 3D 시뮬레이터와 게임 인터랙션까지 만들었습니다.',
+        top: ['dero', 'lumiere', 'pawlice']
       },
       infra: {
         label: 'Infra', cls: 'ax-infra',
         pill: 'Portfolio 2026 · Cloud · Infra',
         head: '한정된 자원 안에서 끊기지 않게 만듭니다.',
-        sub: 'EC2 한 대의 무중단 배포부터 멀티 리전 설계와 비용 구조 분해까지.',
-        top: ['aws', 'dero', 'lumiere']
+        sub: 'EC2 한 대의 무중단 배포부터 멀티 리전 설계와 비용 구조 분해까지. 무엇을 감수했는지 함께 적습니다.',
+        top: ['aws', 'dero', 'vimp']
       },
       data: {
         label: 'Data · AI', cls: 'ax-data',
         pill: 'Portfolio 2026 · Data · AI',
         head: '모델의 출력을 믿을 수 있는 데이터로 바꿉니다.',
-        sub: '인식은 반드시 틀린다는 전제에서 검증 규칙과 보정 흐름을 함께 설계합니다.',
-        top: ['vimp', 'movierec', 'cafe']
+        sub: '인식은 틀린다는 전제에서 검증 규칙과 보정 흐름을 함께 설계합니다. 지표는 무엇 대비인지와 같이 적습니다.',
+        top: ['vimp', 'cafe', 'aws']
       },
       product: {
         label: 'Product Engineer', cls: 'ax-pm',
         pill: 'Portfolio 2026 · Product Engineer',
         head: '제품의 문제를 기술로 풉니다.',
-        sub: '기획부터 배포·운영까지 한 줄로 가져가고, 선택할 때마다 기준과 트레이드오프를 남깁니다.',
-        top: ['dero', 'quiz', 'vimp']
+        sub: '기획부터 배포·운영까지 한 줄로 가져갑니다. 선택할 때마다 기준과 트레이드오프를 남겼습니다.',
+        top: ['dero', 'vimp', 'lumiere']
       },
       pm: {
         label: 'PM · 기획', cls: 'ax-pm',
         pill: 'Portfolio 2026 · PM · Product',
-        head: '문제를 다시 정의하고, 기준을 먼저 세웁니다.',
-        sub: '무엇을 만들지보다 무엇을 만들지 않을지를 먼저 정합니다.',
-        top: ['dero', 'cafe', 'vimp']
+        head: '문제를 다시 정의하고, 만들지 않을 것부터 정합니다.',
+        sub: '사용자 조사로 문제를 특정하고, 기간·인원 조건 안에서 범위를 자릅니다. 기각한 선택과 그 근거를 함께 남깁니다.',
+        top: ['dero', 'lumiere', 'derobm']
       }
     };
 
@@ -394,13 +421,18 @@
       a.setAttribute('href', h + (h.indexOf('?') > -1 ? '&' : '?') + 'role=' + role);
     });
 
-    /* hero copy */
+    /* hero copy — data-fixed 가 붙은 문단은 건드리지 않는다.
+       사진을 이력 쪽으로 옮기면서 그 페이지에도 .hero-lede 가 생겼는데,
+       거기 적힌 전공 설명까지 직무 문구로 덮어써 버리고 있었다. */
     var pill = document.querySelector('.hero .pill');
     if (pill) pill.textContent = R.pill;
-    var big = document.querySelector('.hero-lede .big');
-    if (big) big.textContent = R.head;
-    var en = document.querySelector('.hero-lede .en');
-    if (en) en.textContent = R.sub;
+    var lede = document.querySelector('.hero-lede:not([data-fixed])');
+    if (lede) {
+      var big = lede.querySelector('.big');
+      if (big) big.textContent = R.head;
+      var en = lede.querySelector('.en');
+      if (en) en.textContent = R.sub;
+    }
 
     /* featured folders → this role's top three */
     var row = document.querySelector('.folders');
@@ -423,12 +455,15 @@
       });
       row.innerHTML = R.top.map(function (id, i) {
         var x = P[id];
-        return '<a class="folder" style="--fc:var(--' + cols[i] + ')" href="/projects/' + id + '?role=' + role + '">' +
+        return '<a class="folder" style="--fc:var(--' + cols[i] + ')" href="/projects/' + (id === 'derobm' ? 'dero-bm' : id) + '?role=' + role + '">' +
           '<span class="folder-art" aria-hidden="true"><span class="fb"></span><span class="papers">' +
           x.p.map(function (t, k) { return '<span class="paper p' + (k + 1) + '">' + t + '</span>'; }).join('') +
           '</span><span class="ff"><span class="mark">0' + (i + 1) + '</span></span></span>' +
           '<span class="folder-cap"><span class="nm">' + x.n + '</span><span class="yr">' + x.y + '</span></span>' +
-          '<span class="folder-desc">' + x.d + '</span>' +
+          '<span class="folder-desc">' + x.b.map(function (r) {
+            return '<span class="fd-k">' + r[0] + '</span>'
+                 + '<span class="fd-v">' + r[1] + '</span>';
+          }).join('') + '</span>' +
           '<span class="folder-state">자세히 보기 →</span></a>';
       }).join('');
 
@@ -592,6 +627,28 @@
       card.addEventListener('blur', stop);
     });
   })();
+
+  /* ── 배너 아랫줄: 쳤다 지웠다를 되풀이 ──
+     차분한 보기(PLAIN)나 모션 줄이기에서는 첫 낱말만 세워 둔다. */
+  (function () {
+    var el = document.getElementById('bn-w');
+    if (!el) return;
+    var WORDS = ['PORTFOLIO', 'CASE STUDY', 'DECISIONS'];
+    if (PLAIN || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = WORDS[0];
+      return;
+    }
+    var w = 0, i = WORDS[0].length, back = true, hold = 1600;
+    (function step() {
+      el.textContent = WORDS[w].slice(0, i);
+      var wait;
+      if (!back && i === WORDS[w].length) { back = true; wait = hold; }
+      else if (back && i === 0) { back = false; w = (w + 1) % WORDS.length; wait = 340; }
+      else { i += back ? -1 : 1; wait = back ? 52 : 108; }
+      setTimeout(step, wait);
+    })();
+  })();
+
 })();
 /* ═══════════════════════════════════════════════════════════════════
    증거 이미지 확대 뷰어 (2026-09-21)
@@ -697,4 +754,5 @@
     big.removeAttribute('src');
     if (opener) { try { opener.focus(); } catch (err) {} }
   });
+
 })();

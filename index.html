@@ -8,7 +8,7 @@
 <link rel="icon" href="/assets/avatar.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
@@ -31,30 +31,24 @@
 
 <!-- ══════════  HERO  ══════════ -->
 <header class="wrap hero" id="top">
-  <div class="hero-grid">
+  <div class="banner">
+    <span class="bn-1">PRODUCT &amp; PM</span>
+    <span class="bn-2"><i class="bn-w" id="bn-w">PORTFOLIO</i><b class="bn-c" aria-hidden="true"></b></span>
+  </div>
+  <div class="hero-grid solo">
     <div>
       <h1>안녕하세요,<span class="nm"><b>박성은</b>입니다.</span></h1>
       <p class="role">You can call me &ldquo;BADA&rdquo;</p>
       <p class="hero-lede">
-        <strong class="big">상상을 만들고, 쓰임을 다시 설계합니다.</strong>
-        <span class="en">내 안의 기준은 보수적으로, 받아들이는 것은 개방적으로.</span>
+        <strong class="big">문제를 다시 정의하고, 만들지 않을 것부터 정합니다.</strong>
+        <span class="en">기간·인원 같은 조건을 먼저 적고 그 안에서 범위를 자릅니다.
+        기각한 선택과 그 근거를 함께 남겨, 결과만이 아니라 판단 과정이 읽히도록 정리했습니다.</span>
       </p>
       <div class="cta">
         <a class="btn pri" href="/projects">프로젝트 보기</a>
       </div>
     </div>
 
-    <figure class="hero-card">
-      <img src="/assets/profile.webp" alt="박성은의 프로필 사진." fetchpriority="high" width="640" height="640">
-      <a class="sticker st-gh" href="https://github.com/bada0310" target="_blank" rel="noopener" aria-label="GitHub — github.com/bada0310">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-        <b>GitHub</b>
-      </a>
-      <a class="sticker st-vl" href="https://velog.io/@sungeun0310/posts" target="_blank" rel="noopener" aria-label="기술 블로그 — velog.io/@sungeun0310">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm3.6 4.6c-.6 0-1 .4-1 .9 0 .2 0 .3.1.5l2.4 7c.2.5.5.7 1 .7h1.3c.5 0 .8-.2 1-.7l2.4-7c0-.2.1-.3.1-.5 0-.5-.4-.9-1-.9s-.9.3-1 .8l-1.7 5.4-1.7-5.4c-.1-.5-.4-.8-1-.8Z"/></svg>
-        <b>velog</b>
-      </a>
-    </figure>
   </div>
 </header>
 
@@ -62,8 +56,6 @@
 <section class="wrap sec" id="work">
   <div class="sec-hd">
     <h2>대표 프로젝트 3선</h2>
-    <p>폴더를 누르면 케이스 스터디로 넘어갑니다. 각 프로젝트는
-       <strong>문제 → 기술 의사결정(기각안 포함) → 트러블슈팅 → 결과·회고</strong> 순으로 정리했습니다.</p>
   </div>
 
   <div class="folders">
@@ -78,7 +70,12 @@
         <span class="ff"><span class="mark">01</span></span>
       </span>
       <span class="folder-cap"><span class="nm">Bimp</span><span class="yr">2024.03 – 06</span></span>
-      <span class="folder-desc">냉장고 사진 한 장으로 식재료를 등록한다. 문제를 &lsquo;추천&rsquo;이 아니라 &lsquo;등록&rsquo;으로 재정의한 졸업 프로젝트.</span>
+      <span class="folder-desc">
+        <span class="fd-k">문제 정의</span><span class="fd-v">추천이 아니라 <b>등록의 불편</b>이 진짜 병목이었다</span>
+        <span class="fd-k">나의 역할</span><span class="fd-v">인식 모델 · 추천 로직 · 재고 관리 설계</span>
+        <span class="fd-k">핵심 경험</span><span class="fd-v">서비스 문제를 <b>재정의</b>해 기능 범위를 다시 그림</span>
+        <span class="fd-k">기술 성과</span><span class="fd-v">YOLO 기반 식재료 인식 · <b>대한산업공학회 장려상</b></span>
+      </span>
       <span class="folder-state">자세히 보기 →</span>
     </a>
 
@@ -93,7 +90,12 @@
         <span class="ff"><span class="mark">02</span></span>
       </span>
       <span class="folder-cap"><span class="nm">DERO</span><span class="yr">2026.07 – 08</span></span>
-      <span class="folder-desc">제품을 고르는 화면과 내 책상에 놓아보는 화면을 합쳤다. EC2 한 대에서 무중단 배포까지.</span>
+      <span class="folder-desc">
+        <span class="fd-k">문제 정의</span><span class="fd-v">구매 전 “내 책상에 맞을까”를 확인할 수단 없음 (<b>77명 조사</b>)</span>
+        <span class="fd-k">나의 역할</span><span class="fd-v"><b>프로젝트 기획(PM) · 프로젝트 관리</b> · 백엔드 · 인프라</span>
+        <span class="fd-k">핵심 경험</span><span class="fd-v">6주·5인 조건을 먼저 적고 <b>뺄 기능부터</b> 정함</span>
+        <span class="fd-k">기술 성과</span><span class="fd-v">요구 <b>3개→6개</b>에도 일정 지연 <b>0</b> · 경진대회 우수상</span>
+      </span>
       <span class="folder-state">자세히 보기 →</span>
     </a>
 
@@ -108,7 +110,12 @@
         <span class="ff"><span class="mark">03</span></span>
       </span>
       <span class="folder-cap"><span class="nm">AWS 예약 서비스</span><span class="yr">2024.11 – 12</span></span>
-      <span class="folder-desc">배포로 끝내지 않고 장애 추적·확장성·비용까지. &ldquo;안정성을 얼마나 살 것인가&rdquo;를 기준 문제로 놓았다.</span>
+      <span class="folder-desc">
+        <span class="fd-k">문제 정의</span><span class="fd-v">“안정성을 얼마나 살 것인가”를 <b>기준 문제</b>로 전환</span>
+        <span class="fd-k">나의 역할</span><span class="fd-v"><b>팀장</b> · 클라우드 아키텍처 · 백엔드</span>
+        <span class="fd-k">핵심 경험</span><span class="fd-v">비용을 항목별로 분해해 최대 항목(NAT Gateway) 특정</span>
+        <span class="fd-k">기술 성과</span><span class="fd-v">멀티 리전 설계 · 비용 <b>−20%</b> · <b>최우수상</b></span>
+      </span>
       <span class="folder-state">자세히 보기 →</span>
     </a>
   </div>
@@ -122,7 +129,7 @@
 <!-- ══════════  TIMELINE  ══════════ -->
 <section class="wrap sec" id="timeline">
   <div class="sec-hd">
-    <h2>지나온 순서</h2>
+    <h2>Career Timeline</h2>
     <p>프로젝트는 위, 교육 · 수상은 아래에 두었습니다. 카드를 누르면 짧은 개요가 열리고, 거기서 상세 페이지로 들어갑니다.</p>
   </div>
 
@@ -190,7 +197,7 @@
             <p>관광데이터 공모전 · 모노레포 · 진행 중</p><span class="go">개요 보기 →</span></button></div>
         </div>
         <div class="tlx-item on" style="--tc:var(--c-pink)"><span class="tlx-dot"></span>
-          <div class="tlx-top"><button type="button" class="tlx-card" data-href="/projects/lumiere" data-imgs="lumiere-1,lumiere-2,lumiere-3" data-sum="대표 3선에는 넣지 않았지만 흐름상 중요한 프로젝트입니다. 프로젝트 목록에서 요약과 링크를 볼 수 있습니다.">
+          <div class="tlx-top"><button type="button" class="tlx-card" data-href="/projects/lumiere" data-imgs="lumiere-1,lumiere-2" data-sum="진단 결과를 제품 추천으로 잇는 서비스. 코드보다 주고받을 데이터 양식을 먼저 확정한 2인 협업입니다.">
             <div class="tlx-when">2026.05 – 06</div><h4>Lumière</h4>
             <p>퍼스널컬러 진단 · 데이터 계약 선설계</p><span class="go">개요 보기 →</span></button></div>
         </div>

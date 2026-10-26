@@ -45,14 +45,42 @@
     <div class="deep-body">
             <div class="block" data-sec="overview">
         <h4>데이터 · 전처리</h4>
-        <p>MovieLens 평점 데이터와 TMDB 5000 메타데이터를 합쳐 썼습니다.</p>
-        <pre class="flow">① 영화 ID를 <b>고유한 연속 정수로 매핑</b> — 임베딩 레이어가 다룰 수 있는 형태로
-② <b>num_users · num_movies</b> 산출 → 네트워크 입력 차원 결정
-③ train_test_split 으로 훈련 / 테스트 분리</pre>
-        <p style="margin-top:.7rem;font-size:.86rem;color:var(--muted)"><b>latent dimension</b> — 임베딩에서 사용자와 아이템의 숨은 특성을 표현하는 차원 수. 모델이 학습할 수 있는 정보의 복잡도를 정합니다.</p>
+        <dl class="kv">
+          <dt>데이터</dt><dd>MovieLens 평점 데이터 + TMDB 5000 메타데이터</dd>
+          <dt>전처리 ①</dt><dd>영화 ID를 <b>고유한 연속 정수로 매핑</b> — 임베딩 레이어가 다룰 수 있는 형태로</dd>
+          <dt>전처리 ②</dt><dd>num_users · num_movies 산출 → 네트워크 입력 차원 결정</dd>
+          <dt>전처리 ③</dt><dd>train_test_split 으로 훈련 / 테스트 분리</dd>
+          <dt>용어</dt><dd><b>latent dimension</b> — 임베딩에서 사용자와 아이템의 숨은 특성을 표현하는 차원 수. 모델이 학습할 수 있는 정보의 복잡도를 정합니다.</dd>
+        </dl>
       </div>
 <div class="block" data-sec="overview">
         <h4>핵심 성과 · Key Achievements</h4>
+        <figure class="dgm">
+          <svg viewBox="0 0 720 206" role="img" aria-label="GMF와 NNMF의 훈련 손실과 테스트 MSE 비교. GMF는 훈련 0.0665에서 테스트 0.2846으로 격차가 4.3배, NNMF는 훈련 0.1903에서 테스트 0.2859로 격차가 1.5배다. 테스트 점수는 둘이 거의 같다.">
+            <text class="t2" x="12" y="20">50 에포크 · 훈련 손실 → 테스트 MSE</text>
+
+            <text class="t1" x="12" y="62">GMF</text>
+            <text class="t2" x="12" y="80">기각</text>
+            <text class="t2" x="78" y="56" text-anchor="end">훈련</text>
+            <rect x="88" y="42" width="100" height="18" rx="3" fill="var(--fc)" opacity=".3"/>
+            <text class="t2" x="196" y="56">0.0665</text>
+            <text class="t2" x="78" y="82" text-anchor="end">테스트</text>
+            <rect x="88" y="68" width="427" height="18" rx="3" fill="var(--fc)"/>
+            <text class="t2" x="523" y="82">0.2846</text>
+            <text class="t1" x="600" y="72">격차 4.3배</text>
+
+            <text class="t1" x="12" y="146">NNMF</text>
+            <text class="t2" x="12" y="164">채택</text>
+            <text class="t2" x="78" y="140" text-anchor="end">훈련</text>
+            <rect x="88" y="126" width="285" height="18" rx="3" fill="var(--fc)" opacity=".3"/>
+            <text class="t2" x="381" y="140">0.1903</text>
+            <text class="t2" x="78" y="166" text-anchor="end">테스트</text>
+            <rect x="88" y="152" width="429" height="18" rx="3" fill="var(--fc)"/>
+            <text class="t2" x="525" y="166">0.2859</text>
+            <text class="t1" x="600" y="156">격차 1.5배</text>
+          </svg>
+          <figcaption><b>학습 성능이 아니라 격차로 골랐다</b> — 테스트 점수는 <b>0.5% 차이</b>로 사실상 같은데, 훈련·테스트 격차만 <b>3배</b> 벌어졌다. 학습 곡선이 화려하던 GMF를 과적합을 근거로 기각했다. <span class="mono">ncf 모델 보고서</span>의 실측값으로 그린 그림.</figcaption>
+        </figure>
         <ul class="kpi">
 <li data-axis="data"><b>격차 4.3배 vs 1.5배로 기각</b> 같은 <strong>50 에포크</strong>에서
               <strong>GMF</strong>는 훈련 손실 <strong>0.0665 &rarr; 테스트 MSE 0.2846</strong>(격차 <strong>4.3배</strong>),
@@ -72,8 +100,9 @@
         </details>
         <div class="meta2">
           <div><span class="meta2-k">기간</span>2025 · 데이터분석특론 팀 프로젝트</div>
-          <div><span class="meta2-k">팀</span>팀 프로젝트</div>
-          <div><span class="meta2-k">나의 역할</span>모델 구현 · 비교 실험 · 보고서</div>
+          <div><span class="meta2-k">팀</span>3인 팀</div>
+          <div><span class="meta2-k">나의 역할</span>NCF(GMF · NNMF) 구현 · 비교 실험 · <b>보고서 작성</b></div>
+          <div><span class="meta2-k">분담</span>발표는 인구통계학적 필터링 섹션, NCF 비교는 보고서로 맡았습니다</div>
           <div><span class="meta2-k">산출물</span>NCF 모델 보고서 · 최종 보고서 · 발표자료</div>
         </div>
         <div class="stack2">

@@ -45,15 +45,26 @@
     <div class="deep-body">
             <div class="block" data-sec="overview">
         <h4>Problem</h4>
-        <p>상권 분석 서비스는 &ldquo;이 자리는 80점&rdquo; 같은 점수를 줍니다. 그런데 창업자가 실제로 알고 싶은 건 <strong>무엇 때문에 80점인지</strong>입니다. 점수만으로는 무엇을 바꿔야 할지 알 수 없습니다.</p>
-        <p>그래서 목표를 <strong>정확도가 아니라 설명 가능성</strong>에 두었습니다.</p>
+        <dl class="kv">
+          <dt>현상</dt><dd>상권 분석 서비스는 “이 자리는 80점” 같은 <b>점수</b>를 줍니다.</dd>
+          <dt>필요</dt><dd>창업자가 알고 싶은 건 <b>무엇 때문에 80점인지</b>입니다.</dd>
+          <dt>한계</dt><dd>점수만으로는 무엇을 바꿔야 할지 알 수 없습니다.</dd>
+        </dl>
       </div>
 <div class="block" data-sec="overview">
         <h4>나의 활동</h4>
-        <p>행정동 단위로 상권 데이터를 크롤링해 <strong>150개 행정동의 카페 점포 특성표</strong>를 만들었습니다. 리뷰 텍스트는 BERT로 전처리해 수치 변수와 나란히 놓았습니다.</p>
-        <p>그 위에 상관분석과 <strong>SHAP</strong>을 얹어, 특정 입지의 점수가 어떤 변수에서 얼마나 왔는지 분해했습니다. &ldquo;근접점포비율이 이 지역 점수를 이만큼 끌어내린다&rdquo;처럼 말할 수 있게 만드는 것이 목적이었습니다.</p>
+        <dl class="kv">
+          <dt>데이터</dt><dd>행정동 단위로 크롤링해 <b>150개 행정동</b>의 카페 점포 특성표를 만들었습니다.</dd>
+          <dt>텍스트</dt><dd>리뷰를 <b>BERT</b>로 전처리해 수치 변수와 나란히 놓았습니다.</dd>
+          <dt>해석</dt><dd>상관분석과 <b>SHAP</b>으로 점수가 어떤 변수에서 얼마나 왔는지 분해했습니다.</dd>
+          <dt>목적</dt><dd>“근접점포비율이 이 지역 점수를 이만큼 끌어내린다”처럼 말할 수 있게 만드는 것.</dd>
+        </dl>
       </div>
-            <div class="block" data-sec="decision">
+                    <figure class="dgm pic">
+          <img src="/assets/cafe-correlation.webp" alt="매출액과 상관관계가 높은 변수 9개 순위와 변수 간 상관관계 히트맵. 1위 시장규모 0.451962, 2위 여성 30~39세 0.431944, 3위 남성 30~39세 0.414114 순이다." loading="lazy" decoding="async">
+          <figcaption><b>상관분석 결과</b> — 1위가 <b>시장규모(0.452)</b>, 2위가 <b>30대 여성(0.432)</b>. 통념과 달리 유동인구가 아니라 <b>연령·성별로 쪼갠 인구 구조</b>의 설명력이 높았다.</figcaption>
+        </figure>
+<div class="block" data-sec="decision">
         <h4>분석 의사결정 — 정확도 대신 설명 가능성</h4>
 
         <div class="dec">
@@ -85,6 +96,11 @@
       </div>
 <div class="block" data-sec="arch">
         <h4>데이터 · 파이프라인</h4>
+        <figure class="dgm pic">
+          <img src="/assets/cafe-flow.webp" alt="카페 상권 분석 파이프라인. NICE bizmap · 상권정보 · 네이버 리뷰데이터 · 인천데이터포털에서 모은 데이터를 정제하고 변수를 뽑아 학습·검증 세트로 나눈 뒤, 회귀 모델과 교차검증을 거쳐 점포 정보와 입지 정보로 시각화한다." loading="lazy" decoding="async">
+          <figcaption><b>분석 흐름</b> — 수집처부터 시각화까지. 쓸 만한 기성 데이터가 없어 <b>수집 단계부터 직접</b> 만들었다.</figcaption>
+        </figure>
+
         <pre class="flow">인천 <b>행정동별 크롤링</b>
    → 카페 점포 특성 정리 <b>150개 행정동</b>
    → 변수: 지역특성 · 근접점포개수 · 근접점포비율

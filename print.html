@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
-@page{size:A4;margin:0}
+@page{size:338.67mm 190.5mm;margin:0}   /* PPT 16:9 */
 :root{
   --fg:#101315; --fg2:#3d4448; --mut:#6d777c; --line:#dfe4e6; --line2:#eef1f2;
   --bg:#fff; --soft:#f5f7f8;
@@ -19,7 +19,13 @@
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-s);font-size:9.15pt;line-height:1.55;
      letter-spacing:-.005em;word-break:keep-all}
-.pg{width:210mm;height:297mm;padding:12.5mm 15mm 12mm;position:relative;page-break-after:always;overflow:hidden}
+.pg{width:338.67mm;height:190.5mm;padding:10mm 14mm 9mm;position:relative;page-break-after:always;overflow:hidden;
+     columns:2;column-gap:12mm;column-fill:auto}
+/* 머리글은 두 단에 걸친다 */
+.sh{column-span:all}
+/* 한 덩어리가 단 사이에서 끊기지 않게 */
+.kpi li,.dec,.ts,.retro>div,.shots figure,.mt,.stk,.axmap div,.hl>div,table,.note,.plan
+  {break-inside:avoid;page-break-inside:avoid}
 .pg:last-child{page-break-after:auto}
 h1,h2,h3,h4{margin:0;letter-spacing:-.03em;line-height:1.22}
 p{margin:0}
@@ -28,22 +34,22 @@ b,strong{font-weight:700}
 code{font-family:var(--f-m);font-size:.88em;background:var(--soft);padding:.05em .28em;border-radius:3px}
 
 /* running foot */
-.pg::after{content:attr(data-foot);position:absolute;left:16mm;right:16mm;bottom:7mm;
+.pg::after{content:attr(data-foot);position:absolute;left:14mm;right:14mm;bottom:5mm;
   font-family:var(--f-m);font-size:7pt;color:var(--mut);border-top:1px solid var(--line2);padding-top:2.5mm;
   display:flex;justify-content:space-between}
 
 /* ───── cover ───── */
-.cover{display:flex;flex-direction:column;justify-content:center;padding:26mm 18mm}
+.cover{display:flex;flex-direction:column;justify-content:center;padding:14mm 20mm;columns:auto}
 .cover .eyebrow{font-family:var(--f-d);font-size:8pt;font-weight:700;letter-spacing:.2em;color:var(--mut);text-transform:uppercase}
-.cover h1{font-size:34pt;font-weight:700;letter-spacing:-.045em;margin:6mm 0 0;line-height:1.08}
+.cover h1{font-size:30pt;font-weight:700;letter-spacing:-.045em;margin:4mm 0 0;line-height:1.08}
 .cover h1 em{font-style:normal;color:var(--blue)}
 .cover .role{font-size:13pt;font-weight:500;margin-top:5mm;color:var(--fg2)}
-.cover .line{font-size:11pt;color:var(--fg2);margin-top:9mm;padding-top:6mm;border-top:2px solid var(--fg);max-width:130mm}
+.cover .line{font-size:11pt;color:var(--fg2);margin-top:6mm;padding-top:5mm;border-top:2px solid var(--fg);max-width:170mm}
 .cover .line b{display:block;font-size:12.5pt;color:var(--fg);margin-bottom:2mm}
-.cover .contact{margin-top:auto;padding-top:12mm;display:grid;grid-template-columns:repeat(2,1fr);gap:2.6mm 8mm;
+.cover .contact{margin-top:auto;padding-top:7mm;display:grid;grid-template-columns:repeat(3,1fr);gap:2.2mm 8mm;
   font-family:var(--f-m);font-size:8.6pt;color:var(--fg2)}
 .cover .contact span{color:var(--mut);display:inline-block;min-width:17mm}
-.cover .axes{display:flex;gap:2mm;margin-top:8mm;flex-wrap:wrap}
+.cover .axes{display:flex;gap:2mm;margin-top:6mm;flex-wrap:wrap}
 .ax{font-family:var(--f-m);font-size:8pt;font-weight:700;padding:1.3mm 3.4mm;border-radius:20px;color:#fff}
 .ax.b{background:var(--blue)}.ax.g{background:var(--green)}.ax.y{background:var(--yellow)}.ax.p{background:var(--pink)}
 
@@ -64,7 +70,7 @@ h3.blk{font-family:var(--f-d);font-size:8.3pt;font-weight:700;letter-spacing:.14
 .kpi strong{color:var(--fg)}
 
 /* meta + stack */
-.mt{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6mm 7mm;margin-top:4mm;padding-top:3.4mm;border-top:1px solid var(--line)}
+.mt{display:grid;grid-template-columns:1fr;gap:1.4mm 7mm;margin-top:4mm;padding-top:3.4mm;border-top:1px solid var(--line)}
 .mt div{font-size:9pt;color:var(--fg2)}
 .mt span{font-family:var(--f-m);font-size:7.4pt;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);
   display:inline-block;min-width:19mm}
@@ -107,14 +113,16 @@ td .x{color:var(--mut)}
 .ts .w dd b{color:var(--yellow)}
 
 /* retro grid */
-.retro{display:grid;grid-template-columns:1fr 1fr;gap:2.2mm;margin-top:1.6mm}
+.retro{display:grid;grid-template-columns:1fr;gap:2.2mm;margin-top:1.6mm}
 .retro div{border:1px solid var(--line2);border-radius:1.6mm;padding:2mm 2.4mm;background:var(--soft)}
 .retro span{display:block;font-family:var(--f-d);font-size:7.2pt;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase;color:var(--ac,var(--blue));margin-bottom:.8mm}
 .retro p{font-size:8.4pt;color:var(--fg2)}
 
 /* shots */
-.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:2.2mm;margin-top:1.6mm}
+/* 단 안에서 3장을 한 줄로. 2열로 두면 두 줄이 되어 세로를 두 배 먹고,
+   column-span 으로 펴면 단 흐름이 끊겨 뒤 내용이 새 단으로 밀린다. */
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8mm;margin-top:1.6mm}
 .shots figure{margin:0}
 .shots img{width:100%;aspect-ratio:16/10;object-fit:cover;border:1px solid var(--line);border-radius:1.6mm;display:block}
 .shots figcaption{font-size:7.4pt;color:var(--mut);margin-top:1.2mm;line-height:1.45}
@@ -124,7 +132,7 @@ td .x{color:var(--mut)}
 .plan figcaption b{color:var(--fg)}
 
 /* summary page bits */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+.grid2{display:grid;grid-template-columns:1fr;gap:3mm}
 .axmap{display:grid;gap:2.4mm}
 .axmap div{padding:2.6mm 3mm;border:1px solid var(--line);border-radius:1.8mm}
 .axmap b{display:block;font-family:var(--f-d);font-size:8pt;font-weight:700;letter-spacing:.08em;
@@ -145,7 +153,7 @@ td .x{color:var(--mut)}
 .tiles i.core{background:var(--fg);color:#fff;border-color:var(--fg);font-weight:700}
 
 .tl{display:grid;gap:0}
-.tl li{display:grid;grid-template-columns:25mm 1fr;gap:3mm;padding:1.4mm 0;border-top:1px solid var(--line2)}
+.tl li{display:grid;grid-template-columns:22mm 1fr;gap:2.5mm;padding:1.2mm 0;border-top:1px solid var(--line2)}
 .tl li:first-child{border-top:0}
 .tl .y{font-family:var(--f-m);font-size:8pt;color:var(--mut)}
 .tl b{display:block;font-size:9pt}
@@ -164,8 +172,8 @@ td .x{color:var(--mut)}
   <p class="role">PM · UI/UX · Cloud Infra</p>
 
   <div class="line">
-    <b>상상을 만들고, 쓰임을 다시 설계합니다.</b>
-    내 안의 기준은 보수적으로, 받아들이는 것은 개방적으로.
+    <b>문제를 다시 정의하고, 만들지 않을 것부터 정합니다.</b>
+    기간·인원 같은 조건을 먼저 적고 그 안에서 범위를 자릅니다. 기각한 선택과 그 근거를 함께 남겼습니다.
   </div>
 
   <div class="axes">
@@ -182,6 +190,7 @@ td .x{color:var(--mut)}
     <div><span>Blog</span>velog.io/@sungeun0310</div>
     <div><span>Service</span>www.dero.life</div>
     <div><span>Education</span>한국외대 산업경영공학 · SSAFY 15기</div>
+      <div><span>Language</span>OPIc IH</div>
   </div>
 </section>
 
@@ -221,8 +230,6 @@ td .x{color:var(--mut)}
   <p class="small" style="margin-top:2mm">검은 칩 = <strong>주력</strong>(막혔을 때 스스로 원인을 찾아 끝까지 간 기술) · 흰 칩 = 팀 프로젝트에서 써본 기술</p>
 
   <div class="note">
-    <b>이 문서를 읽는 법.</b> 각 프로젝트는 <b>핵심 성과 → 기술 의사결정(기각안 포함) → 트러블슈팅 → 회고</b> 순으로 정리했습니다.
-    모든 숫자에는 <b>무엇 대비인지</b>를 같은 줄에 적었고, 잘 안 된 선택은 <b>기각 · 실패</b> 표시로 따로 남겼습니다.
     전체 내용과 다이어그램은 웹에서 볼 수 있습니다 — <code>sungeun-portfolio.vercel.app</code>
   </div>
 </section>
@@ -244,7 +251,7 @@ td .x{color:var(--mut)}
   </ul>
 
   <div class="mt">
-    <div><span>나의 역할</span><strong>기획(PM)</strong> · 백엔드 · 인프라 · CI/CD</div>
+    <div><span>나의 역할</span><strong>기획(PM) · 프로젝트 관리</strong> · 백엔드 · 인프라 · CI/CD</div>
     <div><span>제약</span>EC2 1대 · 운영 인력 1명 · 6주</div>
   </div>
   <div class="stk" style="--ac:var(--green)">
@@ -268,55 +275,7 @@ td .x{color:var(--mut)}
   </div>
 </section>
 
-<section class="pg" style="--ac:var(--green)" data-foot="01 DERO · 기술 의사결정 ◆ 4">
-  <div class="sh"><span class="no">01</span><h2>DERO · 기술 의사결정</h2></div>
-
-  <div class="dec">
-    <div class="q">Q. 수많은 프레임워크 중에 왜 Next.js인가</div>
-    <p>이 서비스의 유입 경로가 검색이기 때문입니다. 성장 축이 &lsquo;커뮤니티 게시글 → 제품 → 탐색&rsquo; 순환인데,
-       게시글이 검색에 걸리지 않으면 이 순환의 입구가 없습니다. CSR이면 크롤러가 받아가는 건 빈 HTML입니다.</p>
-    <p>그래서 <strong>&ldquo;React를 쓰자&rdquo;가 아니라 &ldquo;SSR을 해야 한다&rdquo;가 먼저</strong>였습니다. Vite SPA는 SEO 포기, SSG는 게시글·재고가 수시로 바뀌어 기각했습니다.</p>
-    <p class="win"><em>성과</em>커뮤니티 게시글이 검색에 노출 — 유입 순환의 입구 확보</p>
-    <p class="cost"><em>감수</em>EC2 한 대에 Node 런타임이 상주합니다. Jenkins·Postgres·Redis·ES가 이미 올라간 인스턴스라 메모리 여유가 줄었습니다.</p>
-  </div>
-
-  <div class="dec">
-    <div class="q">Q. 왜 PostgreSQL 하나인가 — MongoDB + MySQL로 나눌 생각은 안 했나</div>
-    <p>했고, 그게 교과서적인 답처럼 보였습니다. 그런데 조회 단위를 그려보니 안 맞았습니다.
-       <strong>모델 하나를 불러올 때 GLB(비정형)와 관절 좌표·VESA 규격·치수(정형)를 한 번에</strong> 가져와야 배치와 호환성 판정이 됩니다.</p>
-    <p>둘을 다른 저장소에 두면 모델 1건 조회에 두 DB를 왕복하고 트랜잭션 경계가 갈라집니다.
-       PostgreSQL은 JSONB로 비정형을 담으면서 관계형 제약을 유지해 <strong>한 쿼리로 끝납니다.</strong></p>
-    <p class="win"><em>성과</em>모델 1건 조회가 한 쿼리로 완료. 운영 인원 1명 기준 관리 대상 DB도 한 벌</p>
-    <p class="cost"><em>감수</em>대용량 문서 저장·샤딩은 MongoDB보다 불리. 수십만 건대로 커지면 다시 봐야 합니다.</p>
-  </div>
-
-  <div class="dec fail">
-    <div class="q">Q. Draco가 더 좋은데 왜 안 썼나</div>
-    <p><strong>Draco가 지오메트리 압축에서 더 효율적이고 성능도 확실합니다.</strong> 이건 우리가 더 잘 알아본 결과가 아니라 그냥 사실입니다.</p>
-    <p>문제는 조합이었습니다. 텍스처는 KTX2로 가기로 정해져 있었는데,
-       <strong>three.js에서 Draco 로더와 KTX2 로더를 같이 무는 지점이 매끄럽지 않았습니다.</strong> 6주 안에 둘 다 안정적으로 붙는다는 확신이 없었습니다.</p>
-    <p>그래서 확실히 붙는 축 하나(KTX2)만 가져가고 폴리곤은 토폴로지 단순화로 줄였습니다.</p>
-    <p class="cost"><em>판단</em>기술적 우열로 진 결정이 아니라 <b>기간 안에 검증 가능한 범위로 물러선 결정</b>입니다. 다시 한다면 그 연결부터 스파이크로 떼어내 검증하고 시작하겠습니다.</p>
-  </div>
-
-  <div class="dec">
-    <div class="q">Q. 압축은 왜 무조건 많이 하면 안 되나</div>
-    <p>인코딩·디코딩을 더하면 전송량은 줄지만 <strong>클라이언트에서 디코딩하는 시간만큼 호출 시간이 늘어납니다.</strong>
-       용량과 초기 렌더 시간을 맞바꾸는 거래라서, 압축률이 곧 답은 아니었습니다.</p>
-    <p>POC로 텍스처 프로필을 재고 골랐습니다 — 경량 21.3 / 균형 42.6 / 고품질 47.9 MiB. <strong>MVP 기본값은 경량</strong>, 나머지는 지연 로드.</p>
-    <p class="win"><em>성과</em>소품당 20K~50K 삼각형 예산 확정. 감이 아니라 측정값으로 기본 프로필 결정</p>
-    <p class="cost"><em>감수</em>회전 중에는 디테일을 낮춥니다 — 시점 고정이 목표이지 회전 중 디테일이 목표는 아니라고 봤습니다.</p>
-  </div>
-
-  <div class="dec">
-    <div class="q">Q. 관측에 왜 Prometheus + Grafana인가</div>
-    <p>솔직하게 말하면 <strong>비용 때문입니다.</strong> 관리형 APM은 호스트 단위 월 고정비가 붙습니다. 학생 팀 프로젝트에서 관측에 구독료를 쓸 수 없었습니다.</p>
-    <p class="win"><em>성과</em>관측 스택 추가 과금 0원. 메트릭과 로그를 분리해 EC2 안에서 완결</p>
-    <p class="cost"><em>감수</em><b>서버가 죽으면 관측 도구도 같이 죽습니다</b> — 정작 장애 순간에 못 보는 구조라는 걸 알면서 선택했습니다. 예산이 있었다면 관측만큼은 서비스와 같은 서버에 두지 않았을 것입니다.</p>
-  </div>
-</section>
-
-<section class="pg" style="--ac:var(--green)" data-foot="01 DERO · 트러블슈팅 · 회고 ◆ 5">
+<section class="pg" style="--ac:var(--green)" data-foot="01 DERO · 트러블슈팅 · 회고 ◆ 4">
   <div class="sh"><span class="no">01</span><h2>DERO · 트러블슈팅 · 회고</h2></div>
 
   <h3 class="blk">배포할 때마다 서비스가 몇 초씩 끊겼다</h3>
@@ -348,7 +307,7 @@ td .x{color:var(--mut)}
 </section>
 
 <!-- ═══════════ 4. AWS ═══════════ -->
-<section class="pg" style="--ac:var(--yellow)" data-foot="02 AWS 식당 예약 서비스 ◆ 6">
+<section class="pg" style="--ac:var(--yellow)" data-foot="02 AWS 식당 예약 서비스 ◆ 5">
   <div class="sh"><span class="no">02</span><h2>AWS 식당 예약 서비스</h2>
     <span class="meta">2024.11 – 12<br>4인 (BE 2 · FE 2) · 팀장 · 60%</span></div>
 
@@ -393,7 +352,7 @@ td .x{color:var(--mut)}
   </div>
 </section>
 
-<section class="pg" style="--ac:var(--yellow)" data-foot="02 AWS · 기술 의사결정 · 회고 ◆ 7">
+<section class="pg" style="--ac:var(--yellow)" data-foot="02 AWS · 기술 의사결정 · 회고 ◆ 6">
   <div class="sh"><span class="no">02</span><h2>AWS · 기술 의사결정</h2></div>
 
   <h3 class="blk">구성 대안 비교</h3>
@@ -442,7 +401,7 @@ td .x{color:var(--mut)}
 </section>
 
 <!-- ═══════════ 5. Bimp ═══════════ -->
-<section class="pg" style="--ac:var(--blue)" data-foot="03 Bimp ◆ 8">
+<section class="pg" style="--ac:var(--blue)" data-foot="03 Bimp ◆ 7">
   <div class="sh"><span class="no">03</span><h2>Bimp — 냉장고 식자재 인식 · 레시피 추천</h2>
     <span class="meta">2024.03 – 06 (3개월)<br>4인 (PM·앱 1 · 웹 1 · AI 2) · 40%</span></div>
 
@@ -485,9 +444,96 @@ td .x{color:var(--mut)}
   </dl>
 </section>
 
+<!-- ═══════════ DERO 비즈니스 모델 ═══════════ -->
+<section class="pg" style="--ac:var(--pink)" data-foot="01 DERO 비즈니스 모델 ◆ 0">
+  <div class="sh"><span class="no">01</span><h2>DERO 비즈니스 모델 · 콘텐츠 기획</h2>
+    <span class="meta">2026.07 &ndash; 08<br>5인 팀 · 기획 담당</span></div>
+
+  <p style="color:var(--fg2)">만든 시뮬레이터를 <strong>어떻게 돈이 되게 할 것인가</strong>를 따로 설계했습니다.
+    서비스 개발과 분리해 기획과 BM만 다룹니다. 산출물 <strong>피치덱 20장</strong></p>
+
+  <h3 class="blk">핵심 성과</h3>
+  <ul class="kpi" style="--ac:var(--pink)">
+    <li><b>수익화를 4단계로 쪼갰다</b>처음부터 커머스를 하지 않습니다. 제품 데이터도 사용자도 없는 상태에서 결제를 붙이면
+      <strong>팔 물건도 살 사람도 없습니다.</strong> 앞 단계가 다음 단계의 조건이 되도록 순서를 묶었습니다</li>
+    <li><b>규칙과 AI의 경계를 먼저 그었다</b><strong>가능한가는 규칙, 어울리는가는 AI.</strong>
+      책상에 안 들어가는 제품을 AI가 추천하는 순간 신뢰가 끝나므로, AI가 배치 가능 여부를 판단하지 않게 선을 그었습니다</li>
+    <li><b>검증 못 한 가정을 따로 적었다</b>수수료율 · 3D 모델 제작 비용 · 초기 전환율 · 입점 패키지 가격.
+      발표자료에 <strong>&ldquo;추정치는 과장하지 않는다&rdquo;</strong>를 규칙으로 적고 부록에 남겼습니다</li>
+  </ul>
+
+  <h3 class="blk">수익화 4단계 — 앞 단계가 다음을 연다</h3>
+  <table>
+    <thead><tr><th style="width:26%">단계</th><th>수익원</th><th style="width:32%">열리는 조건</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong> 외부 구매 링크</td><td>클릭 · 전환 기반 제휴 수수료</td><td>제품 데이터만 있으면 가능</td></tr>
+      <tr><td><strong>2</strong> 브랜드 입점</td><td>3D 모델 노출 패키지</td><td>1단계에서 전환이 보여야</td></tr>
+      <tr><td><strong>3</strong> 추천 광고</td><td>AI 추천 영역 스폰서 · 테마 프로모션</td><td>추천이 실제로 쓰여야</td></tr>
+      <tr><td><strong>4</strong> 커머스 확장</td><td>판매 수수료 · 브랜드 분석 리포트</td><td>입점 브랜드가 쌓여야</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mt">
+    <div><span>나의 역할</span>가치 분석 · 수익 모델 설계 · <strong>디지털 마케팅</strong>(채널 · 콘텐츠) · 인터뷰 질문 설계</div>
+    <div><span>시장 근거</span>오늘의집 2024년 2,879억 → 2025년 3,215억 · 영업손실 147억</div>
+  </div>
+
+  <div class="note" style="--ac:var(--pink)">
+    <b>이 문서는 사업 실적이 아니라 기획안입니다.</b>
+    실제 계약 · 매출 · 구매 전환이 확인되지 않았습니다. 좋은 숫자만 쓰지 않으려고 오늘의집의 영업손실도 함께 적었습니다.
+  </div>
+</section>
+
+<!-- ═══════════ 인천 카페 상권 분석 ═══════════ -->
+<section class="pg" style="--ac:var(--green)" data-foot="04 인천 카페 창업 상권 분석 ◆ 0">
+  <div class="sh"><span class="no">04</span><h2>인천 카페 창업 상권 분석</h2>
+    <span class="meta">2025 · 데이터사이언스응용<br>4인 · 기여도 25%</span></div>
+
+  <p style="color:var(--fg2)">상권 분석 서비스는 &ldquo;이 자리는 80점&rdquo; 같은 점수를 줍니다.
+    그런데 창업자가 알고 싶은 건 <strong>무엇 때문에 80점인지</strong>입니다.
+    그래서 목표를 정확도가 아니라 <strong>설명 가능성</strong>에 두었습니다.</p>
+
+  <h3 class="blk">핵심 성과</h3>
+  <ul class="kpi" style="--ac:var(--green)">
+    <li><b>1위는 유동인구가 아니라 시장규모</b>매출과 상관이 높은 변수를 전수 계산해 상위 9개를 특정 —
+      1위 <strong>시장규모 0.452</strong>, 2위 <strong>30대 여성 0.432</strong>.
+      통념과 달리 <strong>연령·성별로 쪼갠 인구 구조</strong>가 더 설명력이 높았습니다</li>
+    <li><b>리뷰만으로 지역구 47% 분류</b>리뷰 텍스트만으로 7개 지역구를 맞히는 분류기를 세워 정확도 약 <strong>47%</strong> —
+      무작위 추측 14.3% 대비 <strong>3.3배</strong>. 리뷰에 지역색이 실제로 담겨 있음을 확인했습니다</li>
+    <li><b>150개 동을 직접 크롤링</b>쓸 만한 기성 데이터가 없어 인천 <strong>150개 행정동</strong>의 점포 특성표를 직접 만들고,
+      지역특성 · 근접점포개수 · 근접점포비율 · 지역점포규모 · 지역매출 · 지역영업이익 · 중요고객층 <strong>7개 축</strong>으로 수치화했습니다</li>
+    <li><b>안 되는 것은 안 된다고 남겼다</b>행정동별 키워드 등장 비율로는 유의미한 차이를 얻지 못했습니다 —
+      &lsquo;커피·빵·디저트가 맛있어요&rsquo; 상위 3개가 어디서나 비중을 차지했기 때문입니다. 이 경로는 <strong>기각</strong>하고 정량 변수로 옮겼습니다</li>
+  </ul>
+
+  <h3 class="blk">분석 의사결정 — 정확도 대신 설명 가능성</h3>
+  <table>
+    <thead><tr><th style="width:32%">선택지</th><th>얻는 것</th><th>치르는 것</th><th style="width:13%">판정</th></tr></thead>
+    <tbody>
+      <tr><td>성능 최우선 (부스팅 튜닝)</td><td>지표상 예측력이 높음</td><td>왜 그런지 설명 못 함 — <strong>의사결정을 도울 수 없음</strong></td><td class="x">기각</td></tr>
+      <tr><td>설명 가능성 우선 (SHAP)</td><td><strong>&ldquo;근접점포비율이 이만큼 끌어내린다&rdquo;</strong>처럼 말할 수 있음</td><td>지표상 정확도는 조금 손해</td><td><strong>채택</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="mt">
+    <div><span>나의 역할</span>데이터 수집 · 변수 설계 · 분석 · 해석</div>
+    <div><span>산출물</span>중간 발표자료 · 최종 보고서 · 행정동 특성 데이터셋 150행</div>
+  </div>
+
+  <div class="shots">
+    <figure><img src="assets/cafe-flow.webp" alt=""><figcaption>수집처부터 시각화까지 — 기성 데이터가 없어 수집 단계부터 직접</figcaption></figure>
+    <figure><img src="assets/cafe-correlation.webp" alt=""><figcaption>매출 상관 상위 9개 변수와 변수 간 상관관계 히트맵</figcaption></figure>
+  </div>
+
+  <div class="note" style="--ac:var(--green)">
+    <b>남은 한계</b> — 크롤링 데이터라 시점이 고정입니다. 상권은 계속 변하는데 <b>스냅샷 한 장으로 판단</b>한 셈이고,
+    시계열로 보지 못한 것이 이 분석의 가장 큰 한계입니다. 기여도가 낮은 변수도 숨기지 않고 보고서에 남겼습니다.
+  </div>
+</section>
+
 <!-- ═══════════ 6. OTHERS ═══════════ -->
-<section class="pg" data-foot="그 외 프로젝트 ◆ 9">
-  <div class="sh"><span class="no">04</span><h2>그 외 프로젝트</h2>
+<section class="pg" data-foot="그 외 프로젝트 ◆ 8">
+  <div class="sh"><span class="no">05</span><h2>그 외 프로젝트</h2>
     <span class="meta">상세 내용은 웹에서<br>sungeun-portfolio.vercel.app</span></div>
 
   <div class="dec" style="--ac:var(--pink)">
@@ -507,7 +553,7 @@ td .x{color:var(--mut)}
   </div>
 
   <div class="dec" style="--ac:var(--yellow)">
-    <div class="q">멍경찰과 냥도둑 — 비대칭 멀티플레이 &nbsp;<span class="small">2026.01–06 · 1인</span></div>
+    <div class="q">멍경찰과 냥도둑 — 생성형 AI를 붙였다가 뺀 이유 &nbsp;<span class="small">2026.01–06 · 1인</span></div>
     <p>추격 중 손은 이미 이동과 아이템 칸에 묶여 있어 <strong>음성이 유일하게 비어 있는 입력 채널</strong>이었습니다. 기능이 멋있어서가 아니라 남은 게 그것뿐이었습니다.
        자유 발화는 <strong>오인식과 응답 지연이 곧 추격 실패</strong>라 기각하고, 명령 5종을 강아지가 실제로 할 수 있는 행동에 1:1 대응시켰습니다.</p>
     <p class="cost"><em>아쉬운 점</em>LLM을 붙이고 <b>나서야</b> 실시간 게임에서 응답 지연이 곧 조작 지연임을 알았습니다. 기능을 먼저 붙이고 범위를 나중에 줄였습니다 — 순서가 반대였습니다.
@@ -539,8 +585,8 @@ td .x{color:var(--mut)}
 </section>
 
 <!-- ═══════════ 7. PROFILE ═══════════ -->
-<section class="pg" data-foot="이력 ◆ 10">
-  <div class="sh"><span class="no">05</span><h2>학력 · 경력 · 수상</h2></div>
+<section class="pg" data-foot="이력 ◆ 9">
+  <div class="sh"><span class="no">06</span><h2>학력 · 경력 · 수상</h2></div>
 
   <div class="grid2">
     <div>

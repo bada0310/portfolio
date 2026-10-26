@@ -48,16 +48,26 @@
     <div class="deep-body">
             <div class="block" data-sec="overview">
         <h4>Problem</h4>
-        <p>퍼스널컬러 진단 서비스는 많지만, 결과가 <strong>구매 행동으로 이어지지 않습니다.</strong> &ldquo;당신은 여름 쿨톤입니다&rdquo;에서 끝나고, 그 톤에 맞는 제품을 찾는 건 다시 사용자 몫이었습니다.</p>
-        <p>그래서 진단 모델의 출력을 <strong>추천의 입력으로 그대로 쓸 수 있는 형태</strong>로 설계하는 것이 과제였습니다.</p>
+        <dl class="kv">
+          <dt>현상</dt><dd>퍼스널컬러 진단 서비스는 많지만, 결과가 <b>구매 행동으로 이어지지 않습니다.</b></dd>
+          <dt>끊기는 지점</dt><dd>“당신은 여름 쿨톤입니다”에서 끝나고, 그 톤에 맞는 제품을 찾는 건 다시 사용자 몫이었습니다.</dd>
+          <dt>과제</dt><dd>진단 모델의 출력을 <b>추천의 입력으로 그대로 쓸 수 있는 형태</b>로 설계하는 것.</dd>
+        </dl>
       </div>
 <div class="block" data-sec="overview">
         <h4>나의 활동 — 붙이기 전에 계약부터</h4>
-        <p>2인 팀이라 각자 맡은 모듈을 나중에 합치는 방식이면 반드시 어긋납니다. 그래서 코드를 쓰기 전에 <strong>모델이 무엇을 내보내고 서버가 무엇을 받을지 먼저 문서로 확정</strong>했습니다.</p>
-        <p>남긴 문서: 아이디어 정리 · 요구사항 정리 · <code>Cloud Architecture Design Document</code> · 퍼스널컬러 AI 구현 문서 · 추천시스템 AI Pick 설계 근거 문서 · 스토리보드 · 와이어프레임 · ERD.</p>
+        <dl class="kv">
+          <dt>제약</dt><dd>2인 팀 — 각자 맡은 모듈을 나중에 합치는 방식이면 <b>반드시 어긋납니다.</b></dd>
+          <dt>먼저 한 일</dt><dd>코드를 쓰기 전에 <b>모델이 무엇을 내보내고 서버가 무엇을 받을지</b> 문서로 확정했습니다.</dd>
+          <dt>남긴 문서</dt><dd>아이디어 정리 · 요구사항 정리 · Cloud Architecture Design Document · 퍼스널컬러 AI 구현 문서 · 추천시스템 AI Pick 설계 근거 문서 · 스토리보드 · 와이어프레임 · ERD</dd>
+        </dl>
         <div class="callout" style="margin-top:.8rem"><b>이 순서 덕분에</b> 모델 쪽 정확도를 손보는 동안에도 서버 쪽은 멈추지 않고 갈 수 있었습니다.</div>
       </div>
-            <div class="block" data-sec="decision">
+                    <figure class="dgm pic">
+          <img src="/assets/lumiere-1.webp" alt="Lumière 데이터 흐름. 위쪽은 사용자 이미지에서 전처리와 AI 진단을 거쳐 진단 결과 DB와 결과 화면으로 가는 흐름이고, 아래쪽은 제품 정보에서 옵션 색상 분석과 제품 색상 DB를 거쳐 퍼스널컬러 매칭과 추천 결과로 가는 흐름이다." loading="lazy" decoding="async">
+          <figcaption><b>먼저 그린 계약</b> — 진단이 만든 <b>사용자 기준값</b>에 제품 색상을 맞춰 추천이 나온다. 이 그림이 두 사람이 합의한 주고받을 양식이었다.</figcaption>
+        </figure>
+<div class="block" data-sec="decision">
         <h4>기술 의사결정</h4>
 
         <div class="dec">
@@ -164,7 +174,11 @@
 [서버]  로컬 Linux 머신 (상시 구동)</pre>
         <p style="margin-top:.7rem;font-size:.86rem;color:var(--muted)">클라우드 비용 없이 공개 주소를 확보해야 했습니다. 로컬 서버를 두고 Cloudflare Tunnel로 끌어냈습니다.</p>
       </div>
-      <div class="block" data-sec="trouble">
+              <figure class="dgm pic">
+          <img src="/assets/lumiere-2.webp" alt="Lumière ERD. User, DiagnosisResult, PersonalColorPalette, Product, ProductOption, ProductAnalysisResult, Favorite/UserAction 테이블과 관계를 보여준다." loading="lazy" decoding="async">
+          <figcaption><b>ERD</b> — 진단 기준값(PersonalColorPalette)과 제품 옵션 색상값이 ProductAnalysisResult 에서 만나 추천 결과가 된다.</figcaption>
+        </figure>
+<div class="block" data-sec="trouble">
         <h4>Troubleshooting — 주소가 바뀔 때마다 연동이 끊겼다</h4>
         <div class="ts">
           <div class="ts-row"><div class="ts-k">증상</div><div class="ts-v">배포할 때마다 프론트에서 <code>net::ERR_FAILED</code> · <code>ERR_NAME_NOT_RESOLVED</code> · 404 · CORS가 번갈아 났습니다.</div></div>

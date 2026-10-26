@@ -34,7 +34,7 @@
   <div class="panel" style="--fc:var(--c-yellow)">
     <div class="panel-hd">
       <div class="case-row">
-        <span class="tag on">Game</span><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">Multiplayer</span><span class="tag">STT</span>
+        <span class="tag on">Game</span><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">Multiplayer</span><span class="tag">STT</span><span class="tag">생성형 AI · LLM</span>
       </div>
       <h1>멍경찰과 냥도둑 — 비대칭 멀티플레이</h1>
       <div class="when">2026.01 – 06 · 1인 프로젝트</div>
@@ -45,24 +45,26 @@
     <div class="deep-body">
             <div class="block" data-sec="overview">
         <h4>설계 과제</h4>
-        <p>경찰과 도둑은 목표가 다릅니다. 같은 맵 안에서 각자 무엇을 해야 하는지가 명확하면서도, 서로의 행동이 추격과 방해로 이어져야 합니다.</p>
-        <p>한쪽만 유리하거나 반복 행동만 이어지면 긴장감이 죽습니다. <strong>역할별 목표와 수단을 분리하면서도 서로에게 영향을 주게</strong> 만드는 것이 과제였습니다.</p>
+        <dl class="kv">
+          <dt>조건</dt><dd>경찰과 도둑은 목표가 다릅니다. 각자 할 일이 명확하면서도 서로의 행동이 추격과 방해로 이어져야 합니다.</dd>
+          <dt>실패 조건</dt><dd>한쪽만 유리하거나 반복 행동만 이어지면 긴장감이 죽습니다.</dd>
+          <dt>과제</dt><dd>역할별 목표와 수단을 <b>분리하면서도 서로에게 영향을 주게</b> 만들기</dd>
+        </dl>
       </div>
 <div class="block" data-sec="overview">
         <h4>나의 활동 — 혼자 만든 멀티플레이를 어떻게 검증했나</h4>
-        <p>1인 프로젝트라 <strong>기획 → 규칙 설계 → UI/UX → 구현 → 테스트</strong> 전 과정을 맡았습니다. 기여도 100%.</p>
-        <p>문제는 검증이었습니다. <strong>멀티플레이 게임인데 플레이어가 한 명</strong>입니다.
-           클라이언트를 여러 개 띄워 혼자 두 역할을 번갈아 조작하는 방식으로는 <strong>동시에 벌어지는 상황</strong>을 재현할 수 없었습니다.</p>
-        <p>그래서 검증 대상을 <strong>&lsquo;재미&rsquo;가 아니라 &lsquo;상태 일관성&rsquo;</strong>으로 좁혔습니다 —
-           방 생성·입장, 역할 선택, 게임 시작까지 <strong>세션 상태가 각 클라이언트에 같게 반영되는지</strong>,
-           그리고 이탈·재입장 시 UI가 이전 상태로 남지 않는지를 반복해서 확인했습니다.</p>
-        <p class="dec-cost" style="margin-top:.9rem"><b>남은 한계</b> 밸런스는 검증하지 못했습니다.
-          경찰과 도둑의 승률이 실제로 비슷한지는 <b>여러 명이 여러 판을 돌려야</b> 알 수 있는데 거기까지 가지 못했습니다.
-          지금 &ldquo;비대칭이 성립한다&rdquo;고 말할 수 있는 근거는 설계 논리이지 플레이 데이터가 아닙니다.</p>
+        <dl class="kv">
+          <dt>역할</dt><dd>기획 → 규칙 설계 → UI/UX → 구현 → 테스트 전 과정 · 기여도 <b>100%</b></dd>
+          <dt>문제</dt><dd>멀티플레이 게임인데 플레이어가 한 명입니다. 클라이언트를 여러 개 띄워도 <b>동시에 벌어지는 상황을 재현할 수 없었습니다.</b></dd>
+          <dt>범위 조정</dt><dd>검증 대상을 ‘재미’가 아니라 <b>‘상태 일관성’</b>으로 좁혔습니다.</dd>
+          <dt>확인한 것</dt><dd>방 생성·입장, 역할 선택, 게임 시작까지 세션 상태가 각 클라이언트에 같게 반영되는지 · 이탈·재입장 시 UI가 이전 상태로 남지 않는지</dd>
+          <dt>남은 한계</dt><dd><b>밸런스는 검증하지 못했습니다.</b> 승률이 실제로 비슷한지는 여러 명이 여러 판을 돌려야 압니다 — 지금 근거는 <b>설계 논리이지 플레이 데이터가 아닙니다.</b></dd>
+        </dl>
       </div>
             <div class="block" data-sec="overview">
         <h4>핵심 성과 · Key Achievements</h4>
         <ul class="kpi">
+<li data-axis="data pm"><b>생성형 AI를 붙였다가 뺐다</b> 자유 발화를 목표로 <strong>LLM을 붙였고</strong>, 붙이고 나서야 실시간 게임에서 <strong>응답 지연이 곧 조작 지연</strong>임을 알았습니다. 기능을 먼저 붙이고 범위를 나중에 줄인 <strong>순서가 반대였던 판단</strong>입니다</li>
 <li data-axis="fe product"><b>명령 5종을 행동에 1:1 대응</b> 자유 발화를 버리고 <strong>강아지가 실제로 할 수 있는 행동</strong>에만 명령을 붙였습니다 — 인식 범위는 좁아졌지만 <strong>“말한 대로 안 되는” 경험이 사라졌습니다</strong></li>
 <li data-axis="fe product"><b>남은 입력 채널은 음성뿐이었다</b> 추격 중 손은 이미 이동과 아이템 칸에 묶여 있습니다.
               남은 채널을 세어 <strong>음성이 유일하게 비어 있음</strong>을 확인하고 STT를 골랐습니다 — 기능이 멋있어서가 아니라 남은 게 그것뿐이었습니다</li>
