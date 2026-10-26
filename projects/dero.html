@@ -379,7 +379,8 @@
         <h4>Infra 의사결정 — 왜 이 도구를 붙였나</h4>
 
         <div class="dec">
-          <div class="dec-q">Q. 관측에 왜 Prometheus + Grafana인가          <div class="tbl-scroll" style="margin-top:.8rem">
+          <div class="dec-q">Q. 관측에 왜 Prometheus + Grafana인가</div>
+          <div class="tbl-scroll" style="margin-top:.8rem">
             <table>
               <thead><tr><th>선택지</th><th>얻는 것</th><th>치르는 것</th><th>판정</th></tr></thead>
               <tbody>
@@ -388,7 +389,6 @@
               </tbody>
             </table>
           </div>
-</div>
           <p>솔직하게 말하면 <strong>비용 때문입니다.</strong> Datadog·New Relic 같은 관리형 APM은 호스트 단위 월 고정비가 붙습니다.
              학생 팀 프로젝트에서 관측에 구독료를 쓸 수 없었습니다.</p>
           <p>Prometheus · Grafana는 같은 EC2에 올려 <strong>추가 과금 0</strong>.
@@ -403,7 +403,8 @@
           </div>
         </div>
 <div class="dec">
-          <div class="dec-q">Q. 배치 작업에 Airflow를 검토했다가 왜 안 썼나          <div class="tbl-scroll" style="margin-top:.8rem">
+          <div class="dec-q">Q. 배치 작업에 Airflow를 검토했다가 왜 안 썼나</div>
+          <div class="tbl-scroll" style="margin-top:.8rem">
             <table>
               <thead><tr><th>선택지</th><th>얻는 것</th><th>치르는 것</th><th>판정</th></tr></thead>
               <tbody>
@@ -412,7 +413,6 @@
               </tbody>
             </table>
           </div>
-</div>
           <p>3D 에셋 경량화는 전형적인 배치 작업입니다. 실패 시 재시도와 단계 간 의존성 관리가 필요해 보여서 <strong>Airflow를 검토했습니다.</strong></p>
           <p>우리 파이프라인은 <strong>사실상 1종</strong>이었습니다. Airflow는 스케줄러 · 웹서버 · 메타DB가 <strong>상주</strong>해야 하는데,
              EC2 한 대에는 이미 <strong>6개 프로세스</strong>가 돌고 있었습니다 — <strong>얹는 비용이 얻는 것보다 컸습니다.</strong></p>
@@ -424,7 +424,8 @@
           <details class="dec-more">
             <summary>기술 선택 2건 더 보기</summary>
 <div class="dec">
-          <div class="dec-q">Q. 왜 Jenkins인가 — GitHub Actions를 두고          <div class="tbl-scroll" style="margin-top:.8rem">
+          <div class="dec-q">Q. 왜 Jenkins인가 — GitHub Actions를 두고</div>
+          <div class="tbl-scroll" style="margin-top:.8rem">
             <table>
               <thead><tr><th>선택지</th><th>얻는 것</th><th>치르는 것</th><th>판정</th></tr></thead>
               <tbody>
@@ -434,13 +435,13 @@
               </tbody>
             </table>
           </div>
-</div>
           <p>소스가 <strong>사내 GitLab</strong>이라 GitHub Actions는 선택지가 아니었고, GitLab CI도 러너를 우리 EC2에 올려야 했습니다.
              그럴 바엔 <strong>인스턴스 안에서 완결되는</strong> Jenkins가 관리 지점이 적었습니다.</p>
           <p class="dec-win"><b>성과</b>사내 GitLab에서 <strong>인스턴스 안에서 완결되는</strong> 파이프라인 확보.</p><p class="dec-cost"><b>감수한 것</b> Jenkins 자체의 유지보수와 플러그인 관리가 우리 몫이 됩니다. 그리고 빌드가 도는 동안 서비스와 CPU를 나눠 씁니다.</p>
         </div>
 <div class="dec">
-          <div class="dec-q">Q. 왜 Elasticsearch까지 넣었나 — Postgres 검색으로는 안 됐나          <div class="tbl-scroll" style="margin-top:.8rem">
+          <div class="dec-q">Q. 왜 Elasticsearch까지 넣었나 — Postgres 검색으로는 안 됐나</div>
+          <div class="tbl-scroll" style="margin-top:.8rem">
             <table>
               <thead><tr><th>선택지</th><th>얻는 것</th><th>치르는 것</th><th>판정</th></tr></thead>
               <tbody>
@@ -449,7 +450,6 @@
               </tbody>
             </table>
           </div>
-</div>
           <p>제품 탐색이 <strong>서비스의 진입점</strong>입니다. 치수 범위 · VESA 규격 · 브랜드 · 카테고리를 동시에 거는 다중 조건 검색이
              첫 화면에서 바로 일어납니다.</p>
           <p>Postgres의 인덱스로도 되지만, 조건 조합이 늘어날 때마다 인덱스 설계를 다시 해야 합니다.
